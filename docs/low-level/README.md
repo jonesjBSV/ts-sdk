@@ -2,12 +2,12 @@
 
 These documents cover the lower level functionalities of the BSV library. Generally, these are more advanced use-cases:
 
-- [Numbers and Points](NUMBERS_POINTS.md)
-- [Public and Private Keys](USING_PRIVATE_PUBLIC_KEYS.md)
-- [AES Symmetric Encryption](AES_SYMMETRIC_ENCRYPTION.md)
-- [ECDSA Digital Signature Algorithm](USING_ECDSA.md)
-- [ECDH (Elliptic Curve Diffie-Hallman)](ECDH.md)
-- [Hashes and HMAC Functions](USING_HASHES_AND_HMAC.md)
-- [Type 42 Derivation](TYPE_42.md)
-- [Transaction Signatures](TX_SIG.md)
-- [Serializing and Deserializing Scripts](USING_SCRIPTS.md)
+* [Numbers and Points](numbers\_points.md)
+* [Public and Private Keys](using\_private\_public\_keys.md)
+* [AES Symmetric Encryption](aes\_symmetric\_encryption.md)
+* [ECDSA Digital Signature Algorithm](using\_ecdsa.md)
+* [ECDH (Elliptic Curve Diffie-Hallman)](ecdh.md)
+* [Hashes and HMAC Functions](https://github.com/bitcoin-sv/ts-sdk/blob/master/docs/low-level/USING\_HASHES\_AND\_HMAC.md)
+* [Type 42 Derivation](type\_42.md)
+* [Transaction Signatures](tx\_sig.md)
+* [Serializing and Deserializing Scripts](using\_scripts.md)

@@ -1,34 +1,33 @@
-# API
+# Primitives API
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
 ## Interfaces
 
 ## Classes
 
-| | |
-| --- | --- |
-| [BasePoint](#class-basepoint) | [Reader](#class-reader) |
-| [BigNumber](#class-bignumber) | [ReductionContext](#class-reductioncontext) |
-| [Curve](#class-curve) | [SHA1](#class-sha1) |
-| [DRBG](#class-drbg) | [SHA256](#class-sha256) |
-| [JacobianPoint](#class-jacobianpoint) | [SHA256HMAC](#class-sha256hmac) |
-| [K256](#class-k256) | [SHA512](#class-sha512) |
-| [Mersenne](#class-mersenne) | [SHA512HMAC](#class-sha512hmac) |
-| [MontgomoryMethod](#class-montgomorymethod) | [Signature](#class-signature) |
-| [Point](#class-point) | [SymmetricKey](#class-symmetrickey) |
-| [PrivateKey](#class-privatekey) | [TransactionSignature](#class-transactionsignature) |
-| [PublicKey](#class-publickey) | [Writer](#class-writer) |
-| [RIPEMD160](#class-ripemd160) |  |
+|                                                          |                                                                  |
+| -------------------------------------------------------- | ---------------------------------------------------------------- |
+| [BasePoint](primitives.md#class-basepoint)               | [Reader](primitives.md#class-reader)                             |
+| [BigNumber](primitives.md#class-bignumber)               | [ReductionContext](primitives.md#class-reductioncontext)         |
+| [Curve](primitives.md#class-curve)                       | [SHA1](primitives.md#class-sha1)                                 |
+| [DRBG](primitives.md#class-drbg)                         | [SHA256](primitives.md#class-sha256)                             |
+| [JacobianPoint](primitives.md#class-jacobianpoint)       | [SHA256HMAC](primitives.md#class-sha256hmac)                     |
+| [K256](primitives.md#class-k256)                         | [SHA512](primitives.md#class-sha512)                             |
+| [Mersenne](primitives.md#class-mersenne)                 | [SHA512HMAC](primitives.md#class-sha512hmac)                     |
+| [MontgomoryMethod](primitives.md#class-montgomorymethod) | [Signature](primitives.md#class-signature)                       |
+| [Point](primitives.md#class-point)                       | [SymmetricKey](primitives.md#class-symmetrickey)                 |
+| [PrivateKey](primitives.md#class-privatekey)             | [TransactionSignature](primitives.md#class-transactionsignature) |
+| [PublicKey](primitives.md#class-publickey)               | [Writer](primitives.md#class-writer)                             |
+| [RIPEMD160](primitives.md#class-ripemd160)               |                                                                  |
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
 
 ### Class: Mersenne
 
-A representation of a pseudo-Mersenne prime.
-A pseudo-Mersenne prime has the general form 2^n - k, where n and k are integers.
+A representation of a pseudo-Mersenne prime. A pseudo-Mersenne prime has the general form 2^n - k, where n and k are integers.
 
 ```ts
 export default class Mersenne {
@@ -47,7 +46,7 @@ export default class Mersenne {
 
 <summary>Class Mersenne Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(name: string, p: string) 
@@ -55,10 +54,10 @@ constructor(name: string, p: string)
 
 Argument Details
 
-+ **name**
-  + An identifier for the Mersenne instance.
-+ **p**
-  + A string representation of the pseudo-Mersenne prime, expressed in hexadecimal.
+* **name**
+  * An identifier for the Mersenne instance.
+* **p**
+  * A string representation of the pseudo-Mersenne prime, expressed in hexadecimal.
 
 Example
 
@@ -66,7 +65,7 @@ Example
 const mersenne = new Mersenne('M31', '7FFFFFFF');
 ```
 
-#### Property k
+**Property k**
 
 The constant subtracted from 2^n to derive a pseudo-Mersenne prime.
 
@@ -74,7 +73,7 @@ The constant subtracted from 2^n to derive a pseudo-Mersenne prime.
 k: BigNumber
 ```
 
-#### Property n
+**Property n**
 
 The exponent which determines the magnitude of the prime.
 
@@ -82,7 +81,7 @@ The exponent which determines the magnitude of the prime.
 n: number
 ```
 
-#### Property name
+**Property name**
 
 The identifier for the Mersenne instance.
 
@@ -90,7 +89,7 @@ The identifier for the Mersenne instance.
 name: string
 ```
 
-#### Property p
+**Property p**
 
 BigNumber equivalent to 2^n - k.
 
@@ -98,7 +97,7 @@ BigNumber equivalent to 2^n - k.
 p: BigNumber
 ```
 
-#### Method imulK
+**Method imulK**
 
 Performs an in-place multiplication of the parameter by constant k.
 
@@ -112,8 +111,8 @@ The result of the multiplication, in BigNumber format.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to multiply with k.
+* **num**
+  * The BigNumber to multiply with k.
 
 Example
 
@@ -121,10 +120,9 @@ Example
 const multiplied = mersenne.imulK(new BigNumber('2345', 16));
 ```
 
-#### Method ireduce
+**Method ireduce**
 
-Reduces an input BigNumber in place, under the assumption that
-it is less than the square of the pseudo-Mersenne prime.
+Reduces an input BigNumber in place, under the assumption that it is less than the square of the pseudo-Mersenne prime.
 
 ```ts
 ireduce(num: BigNumber): BigNumber 
@@ -136,8 +134,8 @@ The reduced BigNumber.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to be reduced.
+* **num**
+  * The BigNumber to be reduced.
 
 Example
 
@@ -145,10 +143,9 @@ Example
 const reduced = mersenne.ireduce(new BigNumber('2345', 16));
 ```
 
-#### Method split
+**Method split**
 
-Shifts bits of the input BigNumber to the right, in place,
-to meet the magnitude of the pseudo-Mersenne prime.
+Shifts bits of the input BigNumber to the right, in place, to meet the magnitude of the pseudo-Mersenne prime.
 
 ```ts
 split(input: BigNumber, out: BigNumber): void 
@@ -156,10 +153,10 @@ split(input: BigNumber, out: BigNumber): void
 
 Argument Details
 
-+ **input**
-  + The BigNumber to be shifted.
-+ **out**
-  + The BigNumber to hold the shifted result.
+* **input**
+  * The BigNumber to be shifted.
+* **out**
+  * The BigNumber to hold the shifted result.
 
 Example
 
@@ -169,14 +166,13 @@ mersenne.split(new BigNumber('2345', 16), new BigNumber());
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: K256
 
-A class representing K-256, a prime number with optimizations, specifically used in the secp256k1 curve.
-It extends the functionalities of the Mersenne class.
-K-256 prime is represented as 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f'
+A class representing K-256, a prime number with optimizations, specifically used in the secp256k1 curve. It extends the functionalities of the Mersenne class. K-256 prime is represented as 'ffffffff ffffffff ffffffff ffffffff ffffffff ffffffff fffffffe fffffc2f'
 
 Example
 
@@ -196,10 +192,9 @@ export default class K256 extends Mersenne {
 
 <summary>Class K256 Details</summary>
 
-#### Constructor
+**Constructor**
 
-Constructor for the K256 class.
-Creates an instance of K256 using the super constructor from Mersenne.
+Constructor for the K256 class. Creates an instance of K256 using the super constructor from Mersenne.
 
 ```ts
 constructor() 
@@ -211,10 +206,9 @@ Example
 const k256 = new K256();
 ```
 
-#### Method imulK
+**Method imulK**
 
-Multiplies a BigNumber ('num') with the constant 'K' in-place and returns the result.
-'K' is equal to 0x1000003d1 or in decimal representation: [ 64, 977 ].
+Multiplies a BigNumber ('num') with the constant 'K' in-place and returns the result. 'K' is equal to 0x1000003d1 or in decimal representation: \[ 64, 977 ].
 
 ```ts
 imulK(num: BigNumber): BigNumber 
@@ -226,8 +220,8 @@ Returns the mutated BigNumber after multiplication.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to multiply with K.
+* **num**
+  * The BigNumber to multiply with K.
 
 Example
 
@@ -236,10 +230,9 @@ const number = new BigNumber(12345);
 const result = k256.imulK(number);
 ```
 
-#### Method split
+**Method split**
 
-Splits a BigNumber into a new BigNumber based on specific computation
-rules. This method modifies the input and output big numbers.
+Splits a BigNumber into a new BigNumber based on specific computation rules. This method modifies the input and output big numbers.
 
 ```ts
 split(input: BigNumber, output: BigNumber): void 
@@ -247,10 +240,10 @@ split(input: BigNumber, output: BigNumber): void
 
 Argument Details
 
-+ **input**
-  + The BigNumber to be split.
-+ **output**
-  + The BigNumber that results from the split.
+* **input**
+  * The BigNumber to be split.
+* **output**
+  * The BigNumber that results from the split.
 
 Example
 
@@ -262,14 +255,13 @@ k256.split(input, output);
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: ReductionContext
 
-A base reduction engine that provides several arithmetic operations over
-big numbers under a modulus context. It's particularly suitable for
-calculations required in cryptography algorithms and encoding schemas.
+A base reduction engine that provides several arithmetic operations over big numbers under a modulus context. It's particularly suitable for calculations required in cryptography algorithms and encoding schemas.
 
 ```ts
 export default class ReductionContext {
@@ -301,7 +293,7 @@ export default class ReductionContext {
 
 <summary>Class ReductionContext Details</summary>
 
-#### Constructor
+**Constructor**
 
 Constructs a new ReductionContext.
 
@@ -311,8 +303,8 @@ constructor(m: BigNumber | "k256")
 
 Argument Details
 
-+ **m**
-  + A BigNumber representing the modulus, or 'k256' to create a context for Koblitz curve.
+* **m**
+  * A BigNumber representing the modulus, or 'k256' to create a context for Koblitz curve.
 
 Example
 
@@ -321,7 +313,7 @@ new ReductionContext(new BigNumber(11));
 new ReductionContext('k256');
 ```
 
-#### Property m
+**Property m**
 
 The modulus used for reduction operations.
 
@@ -329,7 +321,7 @@ The modulus used for reduction operations.
 m: BigNumber
 ```
 
-#### Property prime
+**Property prime**
 
 The prime number utilised in the reduction context, typically an instance of Mersenne class.
 
@@ -337,7 +329,7 @@ The prime number utilised in the reduction context, typically an instance of Mer
 prime: Mersenne | null
 ```
 
-#### Method add
+**Method add**
 
 Performs the addition operation on two BigNumbers in the reduction context.
 
@@ -351,10 +343,10 @@ Returns the result of 'a + b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + First BigNumber to add.
-+ **b**
-  + Second BigNumber to add.
+* **a**
+  * First BigNumber to add.
+* **b**
+  * Second BigNumber to add.
 
 Example
 
@@ -363,7 +355,7 @@ const context = new ReductionContext(new BigNumber(5));
 context.add(new BigNumber(2), new BigNumber(4)); // Returns 1
 ```
 
-#### Method convertFrom
+**Method convertFrom**
 
 Converts a BigNumber from reduction context to its regular form.
 
@@ -377,8 +369,8 @@ Returns the converted BigNumber in its regular form.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to convert from the reduction context.
+* **num**
+  * The BigNumber to convert from the reduction context.
 
 Example
 
@@ -388,7 +380,7 @@ const a = context.convertTo(new BigNumber(8)); // 'a' is now 1 in the reduction 
 context.convertFrom(a); // Returns 1
 ```
 
-#### Method convertTo
+**Method convertTo**
 
 Converts a BigNumber to its equivalent in the reduction context.
 
@@ -402,8 +394,8 @@ Returns the converted BigNumber compatible with the reduction context.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to convert to the reduction context.
+* **num**
+  * The BigNumber to convert to the reduction context.
 
 Example
 
@@ -412,10 +404,9 @@ const context = new ReductionContext(new BigNumber(7));
 context.convertTo(new BigNumber(8)); // Returns 1 (8 % 7)
 ```
 
-#### Method iadd
+**Method iadd**
 
-Performs an in-place addition operation on two BigNumbers in the reduction context
-in order to avoid creating a new BigNumber, it modifies the first one with the result.
+Performs an in-place addition operation on two BigNumbers in the reduction context in order to avoid creating a new BigNumber, it modifies the first one with the result.
 
 ```ts
 iadd(a: BigNumber, b: BigNumber): BigNumber 
@@ -427,10 +418,10 @@ Returns the modified 'a' after addition with 'b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + First BigNumber to add.
-+ **b**
-  + Second BigNumber to add.
+* **a**
+  * First BigNumber to add.
+* **b**
+  * Second BigNumber to add.
 
 Example
 
@@ -440,7 +431,7 @@ const a = new BigNumber(2);
 context.iadd(a, new BigNumber(4)); // Modifies 'a' to be 1
 ```
 
-#### Method imod
+**Method imod**
 
 Performs an in-place reduction of the given BigNumber by the modulus of the reduction context, 'm'.
 
@@ -454,8 +445,8 @@ Returns the reduced result.
 
 Argument Details
 
-+ **a**
-  + BigNumber to be reduced.
+* **a**
+  * BigNumber to be reduced.
 
 Example
 
@@ -464,10 +455,9 @@ const context = new ReductionContext(new BigNumber(7));
 context.imod(new BigNumber(19)); // Returns 5
 ```
 
-#### Method imul
+**Method imul**
 
-Performs in-place multiplication of two BigNumbers in the reduction context,
-modifying the first BigNumber with the result.
+Performs in-place multiplication of two BigNumbers in the reduction context, modifying the first BigNumber with the result.
 
 ```ts
 imul(a: BigNumber, b: BigNumber): BigNumber 
@@ -479,10 +469,10 @@ Returns the modified 'a' after multiplication with 'b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + First BigNumber to multiply.
-+ **b**
-  + Second BigNumber to multiply.
+* **a**
+  * First BigNumber to multiply.
+* **b**
+  * Second BigNumber to multiply.
 
 Example
 
@@ -492,7 +482,7 @@ const a = new BigNumber(3);
 context.imul(a, new BigNumber(2)); // Modifies 'a' to be 6
 ```
 
-#### Method invm
+**Method invm**
 
 Calculates the multiplicative inverse of a BigNumber in the reduction context.
 
@@ -506,8 +496,8 @@ Returns the multiplicative inverse of 'a' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + The BigNumber to find the multiplicative inverse of.
+* **a**
+  * The BigNumber to find the multiplicative inverse of.
 
 Example
 
@@ -516,10 +506,9 @@ const context = new ReductionContext(new BigNumber(11));
 context.invm(new BigNumber(3)); // Returns 4 (3*4 mod 11 = 1)
 ```
 
-#### Method isqr
+**Method isqr**
 
-Calculates the square of a BigNumber in the reduction context,
-modifying the original BigNumber with the result.
+Calculates the square of a BigNumber in the reduction context, modifying the original BigNumber with the result.
 
 ```ts
 isqr(a: BigNumber): BigNumber 
@@ -531,8 +520,8 @@ Returns the squared 'a' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + BigNumber to be squared.
+* **a**
+  * BigNumber to be squared.
 
 Example
 
@@ -542,10 +531,9 @@ const a = new BigNumber(3);
 context.isqr(a); // Modifies 'a' to be 2 (9 % 7 = 2)
 ```
 
-#### Method isub
+**Method isub**
 
-Performs in-place subtraction of one BigNumber from another in the reduction context,
-it modifies the first BigNumber with the result.
+Performs in-place subtraction of one BigNumber from another in the reduction context, it modifies the first BigNumber with the result.
 
 ```ts
 isub(a: BigNumber, b: BigNumber): BigNumber 
@@ -557,10 +545,10 @@ Returns the modified 'a' after subtraction of 'b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + BigNumber to be subtracted from.
-+ **b**
-  + BigNumber to subtract.
+* **a**
+  * BigNumber to be subtracted from.
+* **b**
+  * BigNumber to subtract.
 
 Example
 
@@ -570,7 +558,7 @@ const a = new BigNumber(4);
 context.isub(a, new BigNumber(2)); // Modifies 'a' to be 2
 ```
 
-#### Method mul
+**Method mul**
 
 Multiplies two BigNumbers in the reduction context.
 
@@ -580,14 +568,14 @@ mul(a: BigNumber, b: BigNumber): BigNumber
 
 Returns
 
-Returns the result of 'a * b' in the reduction context.
+Returns the result of 'a \* b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + First BigNumber to multiply.
-+ **b**
-  + Second BigNumber to multiply.
+* **a**
+  * First BigNumber to multiply.
+* **b**
+  * Second BigNumber to multiply.
 
 Example
 
@@ -596,7 +584,7 @@ const context = new ReductionContext(new BigNumber(7));
 context.mul(new BigNumber(3), new BigNumber(2)); // Returns 6
 ```
 
-#### Method neg
+**Method neg**
 
 Negates a BigNumber in the context of the modulus.
 
@@ -610,8 +598,8 @@ Returns the negation of 'a' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + BigNumber to negate.
+* **a**
+  * BigNumber to negate.
 
 Example
 
@@ -620,7 +608,7 @@ const context = new ReductionContext(new BigNumber(7));
 context.neg(new BigNumber(3)); // Returns 4
 ```
 
-#### Method pow
+**Method pow**
 
 Raises a BigNumber to a power in the reduction context.
 
@@ -634,10 +622,10 @@ Returns the result of 'a' raised to the power of 'num' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + The BigNumber to be raised to a power.
-+ **num**
-  + The power to raise the BigNumber to.
+* **a**
+  * The BigNumber to be raised to a power.
+* **num**
+  * The power to raise the BigNumber to.
 
 Example
 
@@ -646,7 +634,7 @@ const context = new ReductionContext(new BigNumber(7));
 context.pow(new BigNumber(3), new BigNumber(2)); // Returns 2 (3^2 % 7)
 ```
 
-#### Method shl
+**Method shl**
 
 Performs bitwise shift left operation on a BigNumber in the reduction context.
 
@@ -660,10 +648,10 @@ Returns the result of shifting 'a' left by 'num' positions in the reduction cont
 
 Argument Details
 
-+ **a**
-  + BigNumber to perform shift on.
-+ **num**
-  + The number of positions to shift.
+* **a**
+  * BigNumber to perform shift on.
+* **num**
+  * The number of positions to shift.
 
 Example
 
@@ -672,7 +660,7 @@ const context = new ReductionContext(new BigNumber(32));
 context.shl(new BigNumber(4), 2); // Returns 16
 ```
 
-#### Method sqr
+**Method sqr**
 
 Calculates the square of a BigNumber in the reduction context.
 
@@ -686,8 +674,8 @@ Returns the result of 'a^2' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + BigNumber to be squared.
+* **a**
+  * BigNumber to be squared.
 
 Example
 
@@ -696,7 +684,7 @@ const context = new ReductionContext(new BigNumber(7));
 context.sqr(new BigNumber(3)); // Returns 2 (9 % 7 = 2)
 ```
 
-#### Method sqrt
+**Method sqrt**
 
 Calculates the square root of a BigNumber in the reduction context.
 
@@ -710,8 +698,8 @@ Returns the square root of 'a' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + The BigNumber to calculate the square root of.
+* **a**
+  * The BigNumber to calculate the square root of.
 
 Example
 
@@ -720,7 +708,7 @@ const context = new ReductionContext(new BigNumber(9));
 context.sqrt(new BigNumber(4)); // Returns 2
 ```
 
-#### Method sub
+**Method sub**
 
 Subtracts one BigNumber from another BigNumber in the reduction context.
 
@@ -734,10 +722,10 @@ Returns the result of 'a - b' in the reduction context.
 
 Argument Details
 
-+ **a**
-  + BigNumber to be subtracted from.
-+ **b**
-  + BigNumber to subtract.
+* **a**
+  * BigNumber to be subtracted from.
+* **b**
+  * BigNumber to subtract.
 
 Example
 
@@ -746,10 +734,9 @@ const context = new ReductionContext(new BigNumber(7));
 context.sub(new BigNumber(3), new BigNumber(2)); // Returns 1
 ```
 
-#### Method verify1
+**Method verify1**
 
-Verifies that a BigNumber is positive and red. Throws an error if these
-conditions are not met.
+Verifies that a BigNumber is positive and red. Throws an error if these conditions are not met.
 
 ```ts
 verify1(a: BigNumber): void 
@@ -757,8 +744,8 @@ verify1(a: BigNumber): void
 
 Argument Details
 
-+ **a**
-  + The BigNumber to be verified.
+* **a**
+  * The BigNumber to be verified.
 
 Example
 
@@ -768,11 +755,9 @@ this.verify1(new BigNumber(-10).toRed()); //throws an Error
 this.verify1(new BigNumber(10)); //throws an Error
 ```
 
-#### Method verify2
+**Method verify2**
 
-Verifies that two BigNumbers are both positive and red. Also checks
-that they have the same reduction context. Throws an error if these
-conditions are not met.
+Verifies that two BigNumbers are both positive and red. Also checks that they have the same reduction context. Throws an error if these conditions are not met.
 
 ```ts
 verify2(a: BigNumber, b: BigNumber): void 
@@ -780,10 +765,10 @@ verify2(a: BigNumber, b: BigNumber): void
 
 Argument Details
 
-+ **a**
-  + The first BigNumber to be verified.
-+ **b**
-  + The second BigNumber to be verified.
+* **a**
+  * The first BigNumber to be verified.
+* **b**
+  * The second BigNumber to be verified.
 
 Example
 
@@ -795,14 +780,13 @@ this.verify2(new BigNumber(10).toRed(this), new BigNumber(20)); //throws an Erro
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: BigNumber
 
-JavaScript numbers are only precise up to 53 bits. Since Bitcoin relies on
-256-bit cryptography, this BigNumber class enables operations on larger
-numbers.
+JavaScript numbers are only precise up to 53 bits. Since Bitcoin relies on 256-bit cryptography, this BigNumber class enables operations on larger numbers.
 
 ```ts
 export default class BigNumber {
@@ -953,7 +937,7 @@ export default class BigNumber {
 
 <summary>Class BigNumber Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(number: number | string | number[] = 0, base: number | "be" | "le" | "hex" = 10, endian: "be" | "le" = "be") 
@@ -961,12 +945,12 @@ constructor(number: number | string | number[] = 0, base: number | "be" | "le" |
 
 Argument Details
 
-+ **number**
-  + The number (various types accepted) to construct a BigNumber from. Default is 0.
-+ **base**
-  + The base of number provided. By default is 10.
-+ **endian**
-  + The endianness provided. By default is 'big endian'.
+* **number**
+  * The number (various types accepted) to construct a BigNumber from. Default is 0.
+* **base**
+  * The base of number provided. By default is 10.
+* **endian**
+  * The endianness provided. By default is 'big endian'.
 
 Example
 
@@ -975,7 +959,7 @@ import BigNumber from './BigNumber';
 const bn = new BigNumber('123456', 10, 'be');
 ```
 
-#### Property length
+**Property length**
 
 Length of the words array.
 
@@ -990,11 +974,12 @@ let num = new BigNumber(50000);
 console.log(num.length);  // output: 1
 ```
 
-#### Property negative
+**Property negative**
 
 Negative flag. Indicates whether the big number is a negative number.
-- If 0, the number is positive.
-- If 1, the number is negative.
+
+* If 0, the number is positive.
+* If 1, the number is negative.
 
 ```ts
 negative: number
@@ -1007,7 +992,7 @@ let num = new BigNumber("-10");
 console.log(num.negative);  // output: 1
 ```
 
-#### Property red
+**Property red**
 
 Reduction context of the big number.
 
@@ -1015,7 +1000,7 @@ Reduction context of the big number.
 red: ReductionContext | null
 ```
 
-#### Property wordSize
+**Property wordSize**
 
 The word size of big number chunks.
 
@@ -1029,7 +1014,7 @@ Example
 console.log(BigNumber.wordSize);  // output: 26
 ```
 
-#### Property words
+**Property words**
 
 Array of numbers, where each number represents a part of the value of the big number.
 
@@ -1044,10 +1029,9 @@ let num = new BigNumber(50000);
 console.log(num.words);  // output: [ 50000 ]
 ```
 
-#### Method _invmp
+**Method \_invmp**
 
-Compute the multiplicative inverse of the current BigNumber in the modulus field specified by `p`.
-The multiplicative inverse is a number which when multiplied with the current BigNumber gives '1' in the modulus field.
+Compute the multiplicative inverse of the current BigNumber in the modulus field specified by `p`. The multiplicative inverse is a number which when multiplied with the current BigNumber gives '1' in the modulus field.
 
 ```ts
 _invmp(p: BigNumber): BigNumber 
@@ -1059,8 +1043,8 @@ The multiplicative inverse `BigNumber` in the modulus field specified by `p`.
 
 Argument Details
 
-+ **p**
-  + The `BigNumber` specifying the modulus field.
+* **p**
+  * The `BigNumber` specifying the modulus field.
 
 Example
 
@@ -1070,10 +1054,9 @@ const p = new BigNumber('100');
 const inverse = bigNum._invmp(p); // inverse here would be a BigNumber such that (inverse*bigNum) % p = '1'
 ```
 
-#### Method _ishlnsubmul
+**Method \_ishlnsubmul**
 
-Perform an in-place shift left, subtract, and multiply operation on a BigNumber instance.
-This method modifies the existing BigNumber instance.
+Perform an in-place shift left, subtract, and multiply operation on a BigNumber instance. This method modifies the existing BigNumber instance.
 
 ```ts
 _ishlnsubmul(num: BigNumber, mul, shift: number): BigNumber 
@@ -1085,12 +1068,12 @@ the updated BigNumber instance after performing the in-place shift, subtract, an
 
 Argument Details
 
-+ **num**
-  + The BigNumber to be operated on.
-+ **mul**
-  + The multiplication factor.
-+ **shift**
-  + The number of places to shift left.
+* **num**
+  * The BigNumber to be operated on.
+* **mul**
+  * The multiplication factor.
+* **shift**
+  * The number of places to shift left.
 
 Example
 
@@ -1100,10 +1083,9 @@ number._ishlnsubmul(new BigNumber(2), 3, 1);
 console.log(number.toString()); // Outputs result after performing operations
 ```
 
-#### Method abs
+**Method abs**
 
-Obtains the absolute value of a BigNumber instance.
-This operation does not affect the actual object but instead returns a new instance of BigNumber.
+Obtains the absolute value of a BigNumber instance. This operation does not affect the actual object but instead returns a new instance of BigNumber.
 
 ```ts
 abs(): BigNumber 
@@ -1121,7 +1103,7 @@ let absolute = negativeNumber.abs();
 console.log(absolute.toString()); // Outputs: "10"
 ```
 
-#### Method add
+**Method add**
 
 Add `num` to `this` BigNumber.
 
@@ -1135,8 +1117,8 @@ Returns a new BigNumber which is the result of the addition.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to add to `this` BigNumber.
+* **num**
+  * The BigNumber to add to `this` BigNumber.
 
 Example
 
@@ -1146,7 +1128,7 @@ const addResult = num1.add(new BigNumber('20'));
 console.log(addResult.toString());
 ```
 
-#### Method addn
+**Method addn**
 
 Returns a new BigNumber that is the result of adding a plain number to the original BigNumber.
 
@@ -1160,8 +1142,8 @@ Returns a new BigNumber which is the sum of the original BigNumber and the plain
 
 Argument Details
 
-+ **num**
-  + The plain number to add.
+* **num**
+  * The plain number to add.
 
 Example
 
@@ -1170,10 +1152,9 @@ const myNumber = new BigNumber(50);
 const newNumber = myNumber.addn(2); // newNumber becomes 52, myNumber doesn't change.
 ```
 
-#### Method and
+**Method and**
 
-Performs a bitwise AND operation that returns a new BigNumber, and keeps the bits
-set in the result only if the corresponding bit is set in both operands.
+Performs a bitwise AND operation that returns a new BigNumber, and keeps the bits set in the result only if the corresponding bit is set in both operands.
 
 ```ts
 and(num: BigNumber): BigNumber 
@@ -1185,8 +1166,8 @@ Returns new BigNumber resulting from the bitwise AND operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise AND operation with.
+* **num**
+  * The BigNumber to perform the bitwise AND operation with.
 
 Example
 
@@ -1196,11 +1177,9 @@ const num2 = new BigNumber('20');
 console.log(num1.and(num2).toString());
 ```
 
-#### Method andln
+**Method andln**
 
-Returns the result of bitwise AND operation between the least significant 26 bits of
-this BigNumber and the provided number.
-This method is mostly used to mask-off less significant bits.
+Returns the result of bitwise AND operation between the least significant 26 bits of this BigNumber and the provided number. This method is mostly used to mask-off less significant bits.
 
 ```ts
 andln(num: number): number 
@@ -1212,8 +1191,8 @@ The result of the AND operation.
 
 Argument Details
 
-+ **num**
-  + The number to AND with.
+* **num**
+  * The number to AND with.
 
 Example
 
@@ -1222,7 +1201,7 @@ let a = new BigNumber(60);
 let result = a.andln(13); // 12
 ```
 
-#### Method bincn
+**Method bincn**
 
 Increments the value at the bit position specified by the input parameter.
 
@@ -1236,8 +1215,8 @@ This BigNumber after incrementing at the specific bit position.
 
 Argument Details
 
-+ **bit**
-  + The bit position to increment at.
+* **bit**
+  * The bit position to increment at.
 
 Example
 
@@ -1246,7 +1225,7 @@ let a = new BigNumber(5);
 a.bincn(2); // a = 7
 ```
 
-#### Method bitLength
+**Method bitLength**
 
 Returns the number of used bits in this big number.
 
@@ -1258,7 +1237,7 @@ Returns
 
 The number of used bits
 
-#### Method byteLength
+**Method byteLength**
 
 Get the byte length of the BigNumber
 
@@ -1278,7 +1257,7 @@ const bn = new BigNumber('1234');
 const byteLen = bn.byteLength();
 ```
 
-#### Method clone
+**Method clone**
 
 Creates a copy of the current BigNumber instance.
 
@@ -1297,7 +1276,7 @@ const bn = new BigNumber('123456', 10, 'be');
 const bnClone = bn.clone();
 ```
 
-#### Method cmp
+**Method cmp**
 
 Compare this big number with another big number.
 
@@ -1307,15 +1286,12 @@ cmp(num: BigNumber): 1 | 0 | -1
 
 Returns
 
-Returns:
-1 if this big number is greater,
--1 if it's less,
-0 if they are equal.
+Returns: 1 if this big number is greater, -1 if it's less, 0 if they are equal.
 
 Argument Details
 
-+ **num**
-  + The big number to compare with.
+* **num**
+  * The big number to compare with.
 
 Example
 
@@ -1326,10 +1302,9 @@ const bn2 = new BigNumber('6');
 const comparisonResult = bn1.cmp(bn2); // 1 - because 10 is greater than 6
 ```
 
-#### Method cmpn
+**Method cmpn**
 
-Compares this BigNumber with the given number.
-It returns -1 if this BigNumber is less than the number, 0 if they're equal, and 1 if the BigNumber is greater than the number.
+Compares this BigNumber with the given number. It returns -1 if this BigNumber is less than the number, 0 if they're equal, and 1 if the BigNumber is greater than the number.
 
 ```ts
 cmpn(num: number): 1 | 0 | -1 
@@ -1337,12 +1312,12 @@ cmpn(num: number): 1 | 0 | -1
 
 Returns
 
--1, 0, or 1 based on the comparison result.
+\-1, 0, or 1 based on the comparison result.
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -1351,7 +1326,7 @@ let a = new BigNumber(15);
 let result = a.cmpn(10); // 1
 ```
 
-#### Method copy
+**Method copy**
 
 The copy method copies the state of this BigNumber into an exsiting `dest` BigNumber.
 
@@ -1361,8 +1336,8 @@ copy(dest: BigNumber): void
 
 Argument Details
 
-+ **dest**
-  + The BigNumber instance that will be updated to become a copy.
+* **dest**
+  * The BigNumber instance that will be updated to become a copy.
 
 Example
 
@@ -1373,7 +1348,7 @@ bn1.copy(bn2);
 // bn2 is now a BigNumber representing 123456
 ```
 
-#### Method div
+**Method div**
 
 Divides a BigNumber instance by another BigNumber and returns result. This does not modify the actual object.
 
@@ -1387,8 +1362,8 @@ A new BigNumber instance of the division result.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to divide by.
+* **num**
+  * The BigNumber to divide by.
 
 Example
 
@@ -1398,7 +1373,7 @@ let result = number.div(new BigNumber(2));
 console.log(result.toString()); // Outputs: "5"
 ```
 
-#### Method divRound
+**Method divRound**
 
 Returns the rounded quotient after division of one `BigNumber` by another `BigNumber`.
 
@@ -1412,8 +1387,8 @@ The rounded quotient `BigNumber` after division.
 
 Argument Details
 
-+ **num**
-  + The divisor `BigNumber`.
+* **num**
+  * The divisor `BigNumber`.
 
 Example
 
@@ -1423,10 +1398,9 @@ const bigNum2 = new BigNumber('45');
 const quotient = bigNum1.divRound(bigNum2); // quotient here would be '2'
 ```
 
-#### Method divmod
+**Method divmod**
 
-Performs division and/or modulus operation on a BigNumber instance depending on the 'mode' parameter.
-If the mode parameter is not provided, both division and modulus results are returned.
+Performs division and/or modulus operation on a BigNumber instance depending on the 'mode' parameter. If the mode parameter is not provided, both division and modulus results are returned.
 
 ```ts
 divmod(num: BigNumber, mode?: "div" | "mod", positive?: boolean): any 
@@ -1438,12 +1412,12 @@ Object with properties for division (div) and modulo (mod) results.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to divide by.
-+ **mode**
-  + Specifies operation as 'mod' for modulus, 'div' for division, or both if not specified.
-+ **positive**
-  + Specifies if unsigned modulus is requested.
+* **num**
+  * The BigNumber to divide by.
+* **mode**
+  * Specifies operation as 'mod' for modulus, 'div' for division, or both if not specified.
+* **positive**
+  * Specifies if unsigned modulus is requested.
 
 Example
 
@@ -1454,7 +1428,7 @@ console.log(result.div.toString()); // Outputs: "3"
 console.log(result.mod.toString()); // Outputs: "1"
 ```
 
-#### Method divn
+**Method divn**
 
 Returns the quotient `BigNumber` after division of one `BigNumber` by a primitive number.
 
@@ -1468,8 +1442,8 @@ A new quotient `BigNumber` after division.
 
 Argument Details
 
-+ **num**
-  + The divisor primitive number.
+* **num**
+  * The divisor primitive number.
 
 Example
 
@@ -1479,10 +1453,9 @@ const num = 45;
 const quotient = bigNum.divn(num); // quotient here would be '2'
 ```
 
-#### Method egcd
+**Method egcd**
 
-Computes the Extended Euclidean Algorithm for this BigNumber and provided BigNumber `p`.
-The Extended Euclidean Algorithm is a method to find the GCD (Greatest Common Divisor) and the multiplicative inverse in a modulus field.
+Computes the Extended Euclidean Algorithm for this BigNumber and provided BigNumber `p`. The Extended Euclidean Algorithm is a method to find the GCD (Greatest Common Divisor) and the multiplicative inverse in a modulus field.
 
 ```ts
 egcd(p: BigNumber): {
@@ -1498,8 +1471,8 @@ An object `{a: BigNumber, b: BigNumber, gcd: BigNumber}` where `gcd` is the GCD 
 
 Argument Details
 
-+ **p**
-  + The `BigNumber` with which the Extended Euclidean Algorithm will be computed.
+* **p**
+  * The `BigNumber` with which the Extended Euclidean Algorithm will be computed.
 
 Example
 
@@ -1509,7 +1482,7 @@ const bigNum2 = new BigNumber('45');
 const result = bigNum1.egcd(bigNum2);
 ```
 
-#### Method eq
+**Method eq**
 
 Compares the current BigNumber with the given number and returns whether they're equal.
 
@@ -1523,8 +1496,8 @@ Returns true if the current BigNumber is equal to the provided number, otherwise
 
 Argument Details
 
-+ **num**
-  + The number to compare equality with.
+* **num**
+  * The number to compare equality with.
 
 Example
 
@@ -1533,7 +1506,7 @@ let bigNum = new BigNumber(10);
 bigNum.eq(new BigNumber(10)); // true
 ```
 
-#### Method eqn
+**Method eqn**
 
 Checks if this BigNumber instance is equal to a number.
 
@@ -1547,8 +1520,8 @@ Returns true if this BigNumber is equal to the number, false otherwise.
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -1557,7 +1530,7 @@ let bigNumber = new BigNumber('1234');
 let isEqual = bigNumber.eqn(1234); // Returns true
 ```
 
-#### Method expand
+**Method expand**
 
 Increases the BigNumber length up to a certain size and initializes new elements with 0.
 
@@ -1571,8 +1544,8 @@ The BigNumber instance after expansion.
 
 Argument Details
 
-+ **size**
-  + The desired size to grow the BigNumber length.
+* **size**
+  * The desired size to grow the BigNumber length.
 
 Example
 
@@ -1581,7 +1554,7 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.expand(10);
 ```
 
-#### Method forceRed
+**Method forceRed**
 
 Forces the current BigNumber into a reduction context, irrespective of the BigNumber's current state.
 
@@ -1595,8 +1568,8 @@ Returns the BigNumber in the given ReductionContext.
 
 Argument Details
 
-+ **ctx**
-  + The ReductionContext to forcefully convert the BigNumber to.
+* **ctx**
+  * The ReductionContext to forcefully convert the BigNumber to.
 
 Example
 
@@ -1606,7 +1579,7 @@ let redCtx = new ReductionContext();
 bigNum.forceRed(redCtx);
 ```
 
-#### Method fromBits
+**Method fromBits**
 
 Creates a BigNumber from a number representing the "bits" value in a block header.
 
@@ -1620,10 +1593,10 @@ Returns a BigNumber equivalent to the "bits" value in a block header.
 
 Argument Details
 
-+ **bits**
-  + The number representing the bits value in a block header.
-+ **strict**
-  + If true, an error is thrown if the number has negative bit set.
+* **bits**
+  * The number representing the bits value in a block header.
+* **strict**
+  * If true, an error is thrown if the number has negative bit set.
 
 Throws
 
@@ -1636,7 +1609,7 @@ const bits = 0x1d00ffff;
 const bigNumber = BigNumber.fromBits(bits);
 ```
 
-#### Method fromHex
+**Method fromHex**
 
 Creates a BigNumber from a hexadecimal string.
 
@@ -1650,8 +1623,8 @@ Returns a BigNumber created from the hexadecimal input string.
 
 Argument Details
 
-+ **hex**
-  + The hexadecimal string to create a BigNumber from.
+* **hex**
+  * The hexadecimal string to create a BigNumber from.
 
 Example
 
@@ -1660,7 +1633,7 @@ const exampleHex = 'a1b2c3';
 const bigNumber = BigNumber.fromHex(exampleHex);
 ```
 
-#### Method fromJSON
+**Method fromJSON**
 
 Creates a BigNumber from a JSON-serialized string.
 
@@ -1674,8 +1647,8 @@ Returns a BigNumber created from the JSON input string.
 
 Argument Details
 
-+ **str**
-  + The JSON-serialized string to create a BigNumber from.
+* **str**
+  * The JSON-serialized string to create a BigNumber from.
 
 Example
 
@@ -1684,7 +1657,7 @@ const serialized = '{"type":"BigNumber","hex":"a1b2c3"}';
 const bigNumber = BigNumber.fromJSON(serialized);
 ```
 
-#### Method fromNumber
+**Method fromNumber**
 
 Creates a BigNumber from a number.
 
@@ -1698,8 +1671,8 @@ Returns a BigNumber equivalent to the input number.
 
 Argument Details
 
-+ **n**
-  + The number to create a BigNumber from.
+* **n**
+  * The number to create a BigNumber from.
 
 Example
 
@@ -1708,10 +1681,9 @@ const number = 1234;
 const bigNumber = BigNumber.fromNumber(number);
 ```
 
-#### Method fromRed
+**Method fromRed**
 
-Converts a BigNumber from a reduction context, making sure the number is indeed in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Converts a BigNumber from a reduction context, making sure the number is indeed in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 fromRed(): BigNumber 
@@ -1730,7 +1702,7 @@ bigNum.toRed(redCtx);
 bigNum.fromRed();
 ```
 
-#### Method fromScriptNum
+**Method fromScriptNum**
 
 Creates a BigNumber from the format used in Bitcoin scripts.
 
@@ -1744,12 +1716,12 @@ Returns a BigNumber equivalent to the number used in a Bitcoin script.
 
 Argument Details
 
-+ **num**
-  + The number in the format used in Bitcoin scripts.
-+ **requireMinimal**
-  + If true, non-minimally encoded values will throw an error.
-+ **maxNumSize**
-  + The maximum allowed size for the number. If not provided, defaults to 4.
+* **num**
+  * The number in the format used in Bitcoin scripts.
+* **requireMinimal**
+  * If true, non-minimally encoded values will throw an error.
+* **maxNumSize**
+  * The maximum allowed size for the number. If not provided, defaults to 4.
 
 Throws
 
@@ -1762,7 +1734,7 @@ const num = [0x02, 0x01]
 const bigNumber = BigNumber.fromScriptNum(num, true, 5)
 ```
 
-#### Method fromSm
+**Method fromSm**
 
 Creates a BigNumber from a signed magnitude number.
 
@@ -1776,10 +1748,10 @@ Returns a BigNumber equivalent to the signed magnitude number interpreted with s
 
 Argument Details
 
-+ **num**
-  + The signed magnitude number to convert to a BigNumber.
-+ **endian**
-  + Defines endianess. If not provided, big endian is assumed.
+* **num**
+  * The signed magnitude number to convert to a BigNumber.
+* **endian**
+  * Defines endianess. If not provided, big endian is assumed.
 
 Example
 
@@ -1788,7 +1760,7 @@ const num = [0x81]
 const bigNumber = BigNumber.fromSm(num, { endian: 'little' }); // equivalent to BigNumber from '-1'
 ```
 
-#### Method fromString
+**Method fromString**
 
 Creates a BigNumber from a string, considering an optional base.
 
@@ -1802,10 +1774,10 @@ Returns a BigNumber equivalent to the string after conversion from the specified
 
 Argument Details
 
-+ **str**
-  + The string to create a BigNumber from.
-+ **base**
-  + The base used for conversion. If not provided, base 10 is assumed.
+* **str**
+  * The string to create a BigNumber from.
+* **base**
+  * The base used for conversion. If not provided, base 10 is assumed.
 
 Example
 
@@ -1814,7 +1786,7 @@ const str = '1234';
 const bigNumber = BigNumber.fromString(str, 16);
 ```
 
-#### Method fromTwos
+**Method fromTwos**
 
 Converts this big number from two's complement with a specified bit width.
 
@@ -1828,8 +1800,8 @@ Returns the big number converted from two's complement.
 
 Argument Details
 
-+ **width**
-  + The bit width.
+* **width**
+  * The bit width.
 
 Example
 
@@ -1839,7 +1811,7 @@ const bn = new BigNumber('-1234');
 const fromTwos = bn.fromTwos(16);
 ```
 
-#### Method gcd
+**Method gcd**
 
 Computes and returns the greatest common divisor (GCD) of this BigNumber and the provided BigNumber.
 
@@ -1853,8 +1825,8 @@ The GCD of this BigNumber and the provided BigNumber.
 
 Argument Details
 
-+ **num**
-  + The BigNumber with which to compute the GCD.
+* **num**
+  * The BigNumber with which to compute the GCD.
 
 Example
 
@@ -1864,7 +1836,7 @@ let b = new BigNumber(18);
 let gcd = a.gcd(b);
 ```
 
-#### Method gt
+**Method gt**
 
 Checks if this BigNumber instance is greater than another BigNumber.
 
@@ -1878,8 +1850,8 @@ Returns true if this BigNumber is greater than the other BigNumber, false otherw
 
 Argument Details
 
-+ **num**
-  + The BigNumber to compare with.
+* **num**
+  * The BigNumber to compare with.
 
 Example
 
@@ -1889,7 +1861,7 @@ let bigNumber2 = new BigNumber('1234');
 let isGreater = bigNumber1.gt(bigNumber2); // Returns true
 ```
 
-#### Method gte
+**Method gte**
 
 Checks if this BigNumber instance is greater than or equal to another BigNumber.
 
@@ -1903,8 +1875,8 @@ Returns true if this BigNumber is greater than or equal to the other BigNumber, 
 
 Argument Details
 
-+ **num**
-  + The BigNumber to compare with.
+* **num**
+  * The BigNumber to compare with.
 
 Example
 
@@ -1914,7 +1886,7 @@ let bigNumber2 = new BigNumber('1234');
 let isGreaterOrEqual = bigNumber1.gte(bigNumber2); // Returns true
 ```
 
-#### Method gten
+**Method gten**
 
 Checks if this BigNumber instance is greater than or equal to a number.
 
@@ -1928,8 +1900,8 @@ Returns true if this BigNumber is greater than or equal to the number, false oth
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -1938,7 +1910,7 @@ let bigNumber = new BigNumber('1234');
 let isGreaterOrEqual = bigNumber.gten(1234); // Returns true
 ```
 
-#### Method gtn
+**Method gtn**
 
 Checks if this BigNumber instance is greater than a number.
 
@@ -1952,8 +1924,8 @@ Returns true if this BigNumber is greater than the number, false otherwise.
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -1962,7 +1934,7 @@ let bigNumber = new BigNumber('2345');
 let isGreater = bigNumber.gtn(1234); // Returns true
 ```
 
-#### Method iabs
+**Method iabs**
 
 Performs an in-place operation to make the BigNumber an absolute value.
 
@@ -1981,7 +1953,7 @@ const myNumber = new BigNumber(-50);
 myNumber.iabs(); // myNumber becomes 50.
 ```
 
-#### Method iadd
+**Method iadd**
 
 Add `num` to `this` BigNumber in-place.
 
@@ -1995,8 +1967,8 @@ Returns the BigNumber after performing the addition.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to add to `this` BigNumber.
+* **num**
+  * The BigNumber to add to `this` BigNumber.
 
 Example
 
@@ -2006,7 +1978,7 @@ num1.iadd(new BigNumber('20'));
 console.log(num1.toString());
 ```
 
-#### Method iaddn
+**Method iaddn**
 
 Performs an in-place addition of a plain number to the BigNumber.
 
@@ -2020,8 +1992,8 @@ Returns the BigNumber after the addition.
 
 Argument Details
 
-+ **num**
-  + The plain number to add.
+* **num**
+  * The plain number to add.
 
 Throws
 
@@ -2034,12 +2006,9 @@ const myNumber = new BigNumber(50);
 myNumber.iaddn(2); // myNumber becomes 52.
 ```
 
-#### Method iand
+**Method iand**
 
-Performs an in-place operation that does a bitwise AND operation in-place,
-on the current instance and given BigNumber such that it modifies the current
-instance only if neither operand is negative. This method is similar to the iuand method but
-checks for negative values before operation.
+Performs an in-place operation that does a bitwise AND operation in-place, on the current instance and given BigNumber such that it modifies the current instance only if neither operand is negative. This method is similar to the iuand method but checks for negative values before operation.
 
 ```ts
 iand(num: BigNumber): BigNumber 
@@ -2051,8 +2020,8 @@ Returns the current BigNumber instance after performing the bitwise AND operatio
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise AND operation with.
+* **num**
+  * The BigNumber to perform the bitwise AND operation with.
 
 Example
 
@@ -2062,7 +2031,7 @@ const num2 = new BigNumber('20');
 console.log(num1.iand(num2).toString());
 ```
 
-#### Method idivn
+**Method idivn**
 
 Performs an in-place division of a `BigNumber` by a primitive number.
 
@@ -2072,13 +2041,12 @@ idivn(num: number): BigNumber
 
 Returns
 
-The `BigNumber` itself after being divided.
-Note: 'in-place' means that this operation modifies the original `BigNumber`.
+The `BigNumber` itself after being divided. Note: 'in-place' means that this operation modifies the original `BigNumber`.
 
 Argument Details
 
-+ **num**
-  + The divisor primitive number.
+* **num**
+  * The divisor primitive number.
 
 Example
 
@@ -2088,7 +2056,7 @@ const num = 45;
 bigNum.idivn(num); // the bigNum here directly becomes '2'
 ```
 
-#### Method imaskn
+**Method imaskn**
 
 Performs an in-place operation to keep only the lower bits of the number.
 
@@ -2102,8 +2070,8 @@ Returns the BigNumber with only the specified lower bits.
 
 Argument Details
 
-+ **bits**
-  + The number of lower bits to keep.
+* **bits**
+  * The number of lower bits to keep.
 
 Throws
 
@@ -2118,7 +2086,7 @@ const myNumber = new BigNumber(52);
 myNumber.imaskn(2); // myNumber becomes 0 because lower 2 bits of 52 (110100) are 00.
 ```
 
-#### Method imul
+**Method imul**
 
 Performs an in-place multiplication of the BigNumber instance by a given BigNumber.
 
@@ -2132,8 +2100,8 @@ The BigNumber itself after the multiplication.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to multiply with.
+* **num**
+  * The BigNumber to multiply with.
 
 Example
 
@@ -2143,11 +2111,9 @@ const bn2 = new BigNumber('23456');
 bn1.imul(bn2);
 ```
 
-#### Method imuln
+**Method imuln**
 
-Performs an in-place multiplication of the BigNumber instance by a number.
-This method asserts the input to be a number less than 0x4000000 to prevent overflowing.
-If negavtive number is provided, the resulting BigNumber will be inversely negative.
+Performs an in-place multiplication of the BigNumber instance by a number. This method asserts the input to be a number less than 0x4000000 to prevent overflowing. If negavtive number is provided, the resulting BigNumber will be inversely negative.
 
 ```ts
 imuln(num: number): BigNumber 
@@ -2159,8 +2125,8 @@ The BigNumber itself after the multiplication.
 
 Argument Details
 
-+ **num**
-  + The number to multiply with.
+* **num**
+  * The number to multiply with.
 
 Example
 
@@ -2169,7 +2135,7 @@ const bn = new BigNumber('12345');
 bn.imuln(23456);
 ```
 
-#### Method ineg
+**Method ineg**
 
 Negates the big number in-place.
 
@@ -2189,7 +2155,7 @@ const bn = new BigNumber('1234');
 bn.ineg(); // bn is now -1234
 ```
 
-#### Method inotn
+**Method inotn**
 
 In-place method that performs a bitwise NOT operation on a BigNumber up to a specified bit width.
 
@@ -2203,8 +2169,8 @@ Returns the BigNumber after performing the bitwise NOT operation.
 
 Argument Details
 
-+ **width**
-  + The number of bits to perform the NOT operation on.
+* **width**
+  * The number of bits to perform the NOT operation on.
 
 Example
 
@@ -2214,9 +2180,9 @@ num.inotn(10);
 console.log(num.toString());
 ```
 
-#### Method inspect
+**Method inspect**
 
-Utility for inspecting the current BigNumber instance. Accompanied with a prefix '<BN: ' or '<BN-R: '.
+Utility for inspecting the current BigNumber instance. Accompanied with a prefix '\<BN: ' or '\<BN-R: '.
 
 ```ts
 inspect(): string 
@@ -2233,7 +2199,7 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.inspect();
 ```
 
-#### Method invm
+**Method invm**
 
 Computes and returns the modular multiplicative inverse of this BigNumber in the field defined by the provided BigNumber.
 
@@ -2247,8 +2213,8 @@ The modular multiplicative inverse of this BigNumber.
 
 Argument Details
 
-+ **num**
-  + The BigNumber that defines the field.
+* **num**
+  * The BigNumber that defines the field.
 
 Example
 
@@ -2258,10 +2224,9 @@ let field = new BigNumber(7);
 let inverse = a.invm(field);
 ```
 
-#### Method ior
+**Method ior**
 
-Performs a bitwise OR operation with another BigNumber, considering
-that neither of the numbers can be negative. Stores the result in this BigNumber.
+Performs a bitwise OR operation with another BigNumber, considering that neither of the numbers can be negative. Stores the result in this BigNumber.
 
 ```ts
 ior(num: BigNumber): BigNumber 
@@ -2273,8 +2238,8 @@ Returns this BigNumber after performing the bitwise OR operation.
 
 Argument Details
 
-+ **num**
-  + The other BigNumber.
+* **num**
+  * The other BigNumber.
 
 Example
 
@@ -2285,7 +2250,7 @@ const bn2 = new BigNumber('6'); // binary: 0110
 bn1.ior(bn2); // now, bn1 binary: 1110
 ```
 
-#### Method isBN
+**Method isBN**
 
 Checks whether a value is an instance of BigNumber. If not, then checks the features of the input to determine potential compatibility. Regular JS numbers fail this check.
 
@@ -2295,12 +2260,12 @@ static isBN(num: any): boolean
 
 Returns
 
-- Returns a boolean value determining whether or not the checked num parameter is a BigNumber.
+* Returns a boolean value determining whether or not the checked num parameter is a BigNumber.
 
 Argument Details
 
-+ **num**
-  + The value to be checked.
+* **num**
+  * The value to be checked.
 
 Example
 
@@ -2312,10 +2277,9 @@ const invalidNum = 5;
 BigNumber.isBN(invalidNum); // returns false
 ```
 
-#### Method isEven
+**Method isEven**
 
-Checks if this BigNumber is even.
-An even number is an integer which is evenly divisible by two.
+Checks if this BigNumber is even. An even number is an integer which is evenly divisible by two.
 
 ```ts
 isEven(): boolean 
@@ -2332,7 +2296,7 @@ let a = new BigNumber(4);
 let isEven = a.isEven(); // true
 ```
 
-#### Method isNeg
+**Method isNeg**
 
 Checks if the big number is negative.
 
@@ -2352,10 +2316,9 @@ const bn = new BigNumber('-1234');
 const isNegative = bn.isNeg(); // true
 ```
 
-#### Method isOdd
+**Method isOdd**
 
-Checks if this BigNumber is Odd.
-An odd number is an integer which is not evenly divisible by two.
+Checks if this BigNumber is Odd. An odd number is an integer which is not evenly divisible by two.
 
 ```ts
 isOdd(): boolean 
@@ -2372,10 +2335,9 @@ let a = new BigNumber(3);
 let isOdd = a.isOdd(); // true
 ```
 
-#### Method isZero
+**Method isZero**
 
-Checks if this BigNumber is Zero.
-A BigNumber is zero if it only contains one word and that word is 0.
+Checks if this BigNumber is Zero. A BigNumber is zero if it only contains one word and that word is 0.
 
 ```ts
 isZero(): boolean 
@@ -2392,7 +2354,7 @@ let a = new BigNumber(0);
 let isZero = a.isZero(); // true
 ```
 
-#### Method ishln
+**Method ishln**
 
 Performs an in-place left shift operation on the BigNumber instance only if it is non-negative.
 
@@ -2406,8 +2368,8 @@ The BigNumber instance after performing the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of positions to shift.
+* **bits**
+  * The number of positions to shift.
 
 Example
 
@@ -2416,7 +2378,7 @@ let myNumber = new BigNumber(4);
 myNumber.ishln(2); // Returns BigNumber of value 16
 ```
 
-#### Method ishrn
+**Method ishrn**
 
 Performs an in-place right shift operation on the BigNumber instance only if it is non-negative.
 
@@ -2430,12 +2392,12 @@ The BigNumber instance after performing the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of positions to shift.
-+ **hint**
-  + Lowest bit before trailing zeroes.
-+ **extended**
-  + To be filled with the bits that are shifted out.
+* **bits**
+  * The number of positions to shift.
+* **hint**
+  * Lowest bit before trailing zeroes.
+* **extended**
+  * To be filled with the bits that are shifted out.
 
 Example
 
@@ -2444,7 +2406,7 @@ let myNumber = new BigNumber(16);
 myNumber.ishrn(2); // Returns BigNumber of value 4
 ```
 
-#### Method isqr
+**Method isqr**
 
 Performs in-place multiplication of the BigNumber instance by itself.
 
@@ -2463,7 +2425,7 @@ let myNumber = new BigNumber(4);
 myNumber.isqr(); // Returns BigNumber of value 16
 ```
 
-#### Method isub
+**Method isub**
 
 Subtract `num` from `this` BigNumber in-place.
 
@@ -2477,8 +2439,8 @@ Returns the BigNumber after performing the subtraction.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to be subtracted from `this` BigNumber.
+* **num**
+  * The BigNumber to be subtracted from `this` BigNumber.
 
 Example
 
@@ -2488,7 +2450,7 @@ num1.isub(new BigNumber('10'));
 console.log(num1.toString());
 ```
 
-#### Method isubn
+**Method isubn**
 
 Performs an in-place subtraction of a plain number from the BigNumber.
 
@@ -2502,8 +2464,8 @@ Returns the BigNumber after the subtraction.
 
 Argument Details
 
-+ **num**
-  + The plain number to subtract.
+* **num**
+  * The plain number to subtract.
 
 Throws
 
@@ -2516,12 +2478,9 @@ const myNumber = new BigNumber(52);
 myNumber.isubn(2); // myNumber becomes 50.
 ```
 
-#### Method iuand
+**Method iuand**
 
-Performs a bitwise AND operation in-place(this method changes the calling object)
-on the current instance and given BigNumber such that it modifies the current
-instance and keeps the bits set in the result only if the corresponding bit is set
-in both operands.
+Performs a bitwise AND operation in-place(this method changes the calling object) on the current instance and given BigNumber such that it modifies the current instance and keeps the bits set in the result only if the corresponding bit is set in both operands.
 
 ```ts
 iuand(num: BigNumber): BigNumber 
@@ -2533,8 +2492,8 @@ Returns the current BigNumber instance after performing the bitwise AND operatio
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise AND operation with.
+* **num**
+  * The BigNumber to perform the bitwise AND operation with.
 
 Example
 
@@ -2544,10 +2503,9 @@ const num2 = new BigNumber('20');
 console.log(num1.iuand(num2).toString());
 ```
 
-#### Method iuor
+**Method iuor**
 
-Performs a bitwise OR operation with another BigNumber and stores
-the result in this BigNumber.
+Performs a bitwise OR operation with another BigNumber and stores the result in this BigNumber.
 
 ```ts
 iuor(num: BigNumber): BigNumber 
@@ -2559,8 +2517,8 @@ Returns this BigNumber after performing the bitwise OR operation.
 
 Argument Details
 
-+ **num**
-  + The other BigNumber.
+* **num**
+  * The other BigNumber.
 
 Example
 
@@ -2571,7 +2529,7 @@ const bn2 = new(num: BigNumber): BigNumber BigNumber('6'); // binary: 0110
 bn1.iuor(bn2); // now, bn1 binary: 1110
 ```
 
-#### Method iushln
+**Method iushln**
 
 Performs in-place bitwise left shift operation on the BigNumber instance.
 
@@ -2585,8 +2543,8 @@ The BigNumber instance after performing the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of positions to shift.
+* **bits**
+  * The number of positions to shift.
 
 Example
 
@@ -2595,7 +2553,7 @@ let myNumber = new BigNumber(4);
 myNumber.iushln(2); // Returns BigNumber of value 16
 ```
 
-#### Method iushrn
+**Method iushrn**
 
 Performs an in-place unsigned bitwise right shift operation on the BigNumber instance.
 
@@ -2609,12 +2567,12 @@ The BigNumber instance after performing the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of positions to shift.
-+ **hint**
-  + Lowest bit before trailing zeroes.
-+ **extended**
-  + To be filled with the bits that are shifted out.
+* **bits**
+  * The number of positions to shift.
+* **hint**
+  * Lowest bit before trailing zeroes.
+* **extended**
+  * To be filled with the bits that are shifted out.
 
 Example
 
@@ -2623,11 +2581,9 @@ let myNumber = new BigNumber(16);
 myNumber.iushrn(2); // Returns BigNumber of value 4
 ```
 
-#### Method iuxor
+**Method iuxor**
 
-Modifies the current instance by performing a bitwise XOR operation
-in-place with the provided BigNumber. It keeps the bits set in the result only if the
-corresponding bits in the operands are different.
+Modifies the current instance by performing a bitwise XOR operation in-place with the provided BigNumber. It keeps the bits set in the result only if the corresponding bits in the operands are different.
 
 ```ts
 iuxor(num: BigNumber): BigNumber 
@@ -2639,8 +2595,8 @@ Returns the current BigNumber instance after performing the bitwise XOR operatio
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise XOR operation with.
+* **num**
+  * The BigNumber to perform the bitwise XOR operation with.
 
 Example
 
@@ -2650,12 +2606,9 @@ const num2 = new BigNumber('20');
 console.log(num1.iuxor(num2).toString());
 ```
 
-#### Method ixor
+**Method ixor**
 
-Performs an in-place operation that does a bitwise XOR operation in-place,
-on the current instance and given BigNumber such that it modifies the current
-instance only if neither operand is negative. This method is similar to the iuxor method but
-checks for negative values before operation.
+Performs an in-place operation that does a bitwise XOR operation in-place, on the current instance and given BigNumber such that it modifies the current instance only if neither operand is negative. This method is similar to the iuxor method but checks for negative values before operation.
 
 ```ts
 ixor(num: BigNumber): BigNumber 
@@ -2667,8 +2620,8 @@ Returns the current BigNumber instance after performing the bitwise XOR operatio
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise XOR operation with.
+* **num**
+  * The BigNumber to perform the bitwise XOR operation with.
 
 Example
 
@@ -2678,7 +2631,7 @@ const num2 = new BigNumber('20');
 console.log(num1.ixor(num2).toString());
 ```
 
-#### Method lt
+**Method lt**
 
 Checks if this BigNumber instance is less than another BigNumber.
 
@@ -2692,8 +2645,8 @@ Returns true if this BigNumber is less than the other BigNumber, false otherwise
 
 Argument Details
 
-+ **num**
-  + The BigNumber to compare with.
+* **num**
+  * The BigNumber to compare with.
 
 Example
 
@@ -2703,7 +2656,7 @@ let bigNumber2 = new BigNumber('2345');
 let isLess = bigNumber1.lt(bigNumber2); // Returns true
 ```
 
-#### Method lte
+**Method lte**
 
 Checks if this BigNumber instance is less than or equal to another BigNumber.
 
@@ -2717,8 +2670,8 @@ Returns true if this BigNumber is less than or equal to the other BigNumber, fal
 
 Argument Details
 
-+ **num**
-  + The BigNumber to compare with.
+* **num**
+  * The BigNumber to compare with.
 
 Example
 
@@ -2728,7 +2681,7 @@ let bigNumber2 = new BigNumber('2345');
 let isLessOrEqual = bigNumber1.lte(bigNumber2); // Returns true
 ```
 
-#### Method lten
+**Method lten**
 
 Checks if this BigNumber instance is less than or equal to a number.
 
@@ -2742,8 +2695,8 @@ Returns true if this BigNumber is less than or equal to the number, false otherw
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -2752,7 +2705,7 @@ let bigNumber = new BigNumber('2345');
 let isLessOrEqual = bigNumber.lten(2345); // Returns true
 ```
 
-#### Method ltn
+**Method ltn**
 
 Checks if this BigNumber instance is less than a number.
 
@@ -2766,8 +2719,8 @@ Returns true if this BigNumber is less than the number, false otherwise.
 
 Argument Details
 
-+ **num**
-  + The number to compare with.
+* **num**
+  * The number to compare with.
 
 Example
 
@@ -2776,7 +2729,7 @@ let bigNumber = new BigNumber('1234');
 let isLess = bigNumber.ltn(2345); // Returns true
 ```
 
-#### Method maskn
+**Method maskn**
 
 Returns a new BigNumber that keeps only the lower bits of the original number.
 
@@ -2790,8 +2743,8 @@ Returns a new BigNumber with only the specified lower bits of the original numbe
 
 Argument Details
 
-+ **bits**
-  + The number of lower bits to keep.
+* **bits**
+  * The number of lower bits to keep.
 
 Example
 
@@ -2800,7 +2753,7 @@ const myNumber = new BigNumber(52);
 const newNumber = myNumber.maskn(2); // newNumber becomes 0, myNumber doesn't change.
 ```
 
-#### Method max
+**Method max**
 
 Returns the bigger value between two BigNumbers
 
@@ -2810,14 +2763,14 @@ static max(left: BigNumber, right: BigNumber): BigNumber
 
 Returns
 
-- Returns the bigger BigNumber between left and right.
+* Returns the bigger BigNumber between left and right.
 
 Argument Details
 
-+ **left**
-  + The first BigNumber to be compared.
-+ **right**
-  + The second BigNumber to be compared.
+* **left**
+  * The first BigNumber to be compared.
+* **right**
+  * The second BigNumber to be compared.
 
 Example
 
@@ -2827,7 +2780,7 @@ const bn2 = new BigNumber(10);
 BigNumber.max(bn1, bn2); // returns bn2
 ```
 
-#### Method min
+**Method min**
 
 Returns the smaller value between two BigNumbers
 
@@ -2837,14 +2790,14 @@ static min(left: BigNumber, right: BigNumber): BigNumber
 
 Returns
 
-- Returns the smaller value between left and right.
+* Returns the smaller value between left and right.
 
 Argument Details
 
-+ **left**
-  + The first BigNumber to be compared.
-+ **right**
-  + The second BigNumber to be compared.
+* **left**
+  * The first BigNumber to be compared.
+* **right**
+  * The second BigNumber to be compared.
 
 Example
 
@@ -2854,7 +2807,7 @@ const bn2 = new BigNumber(10);
 BigNumber.min(bn1, bn2); // returns bn1
 ```
 
-#### Method mod
+**Method mod**
 
 Returns the remainder after division of one `BigNumber` by another `BigNumber`.
 
@@ -2868,8 +2821,8 @@ The remainder `BigNumber` after division.
 
 Argument Details
 
-+ **num**
-  + The divisor `BigNumber`.
+* **num**
+  * The divisor `BigNumber`.
 
 Example
 
@@ -2879,7 +2832,7 @@ const bigNum2 = new BigNumber('45');
 const remainder = bigNum1.mod(bigNum2); // remainder here would be '10'
 ```
 
-#### Method modrn
+**Method modrn**
 
 Returns the remainder after division of a `BigNumber` by a primitive number.
 
@@ -2893,8 +2846,8 @@ The remainder number after division.
 
 Argument Details
 
-+ **num**
-  + The divisor primitive number.
+* **num**
+  * The divisor primitive number.
 
 Example
 
@@ -2904,8 +2857,7 @@ const num = 45;
 const remainder = bigNum.modrn(num); // remainder here would be '10'
 ```
 
-#### Method move
-
+**Method move**
 
 Directly transfers the attributes of the source BigNumber to the destination BigNumber.
 
@@ -2915,10 +2867,10 @@ static move(dest: BigNumber, src: BigNumber): void
 
 Argument Details
 
-+ **dest**
-  + The BigNumber that attributes will be moved into.
-+ **src**
-  + The BigNumber that attributes will be moved from.
+* **dest**
+  * The BigNumber that attributes will be moved into.
+* **src**
+  * The BigNumber that attributes will be moved from.
 
 Example
 
@@ -2929,10 +2881,9 @@ BigNumber.move(dest, src);
 // dest is now a BigNumber representing 123456
 ```
 
-#### Method mul
+**Method mul**
 
-Performs multiplication between the BigNumber instance and a given BigNumber.
-It creates a new BigNumber to store the result.
+Performs multiplication between the BigNumber instance and a given BigNumber. It creates a new BigNumber to store the result.
 
 ```ts
 mul(num: BigNumber): BigNumber 
@@ -2944,8 +2895,8 @@ The BigNumber resulting from the multiplication operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to multiply with.
+* **num**
+  * The BigNumber to multiply with.
 
 Example
 
@@ -2955,10 +2906,9 @@ const bn2 = new BigNumber('23456');
 const result = bn1.mul(bn2);
 ```
 
-#### Method mulTo
+**Method mulTo**
 
-Performs multiplication between the BigNumber instance and a given BigNumber.
-It chooses the multiplication method based on the lengths of the numbers to optimize execution time.
+Performs multiplication between the BigNumber instance and a given BigNumber. It chooses the multiplication method based on the lengths of the numbers to optimize execution time.
 
 ```ts
 mulTo(num: BigNumber, out: BigNumber): BigNumber 
@@ -2970,10 +2920,10 @@ The BigNumber resulting from the multiplication operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber multiply with.
-+ **out**
-  + The BigNumber where to store the result.
+* **num**
+  * The BigNumber multiply with.
+* **out**
+  * The BigNumber where to store the result.
 
 Example
 
@@ -2984,10 +2934,9 @@ const output = new BigNumber();
 bn1.mulTo(bn2, output);
 ```
 
-#### Method muln
+**Method muln**
 
-Performs multiplication between the BigNumber instance and a number.
-It performs the multiplication operation in-place to a cloned BigNumber.
+Performs multiplication between the BigNumber instance and a number. It performs the multiplication operation in-place to a cloned BigNumber.
 
 ```ts
 muln(num: number): BigNumber 
@@ -2999,8 +2948,8 @@ The resulting BigNumber from the multiplication operation.
 
 Argument Details
 
-+ **num**
-  + The number to multiply with.
+* **num**
+  * The number to multiply with.
 
 Example
 
@@ -3009,7 +2958,7 @@ const bn = new BigNumber('12345');
 const result = bn.muln(23456);
 ```
 
-#### Method neg
+**Method neg**
 
 Negates the big number and returns a new instance.
 
@@ -3029,7 +2978,7 @@ const bn = new BigNumber('1234');
 const neg = bn.neg(); // -1234
 ```
 
-#### Method normSign
+**Method normSign**
 
 Normalizes the sign of the BigNumber. Changes -0 to 0.
 
@@ -3048,7 +2997,7 @@ const bn = new BigNumber('-0', 10, 'be');
 bn.normSign();
 ```
 
-#### Method notn
+**Method notn**
 
 Performs a bitwise NOT operation on a BigNumber up to a specified bit width. Returns a new BigNumber.
 
@@ -3062,8 +3011,8 @@ Returns a new BigNumber resulting from the bitwise NOT operation.
 
 Argument Details
 
-+ **width**
-  + The number of bits to perform the NOT operation on.
+* **width**
+  * The number of bits to perform the NOT operation on.
 
 Example
 
@@ -3073,12 +3022,9 @@ const notnResult = num.notn(10);
 console.log(notnResult.toString());
 ```
 
-#### Method or
+**Method or**
 
-Performs a bitwise OR operation on the current instance and given
-BigNumber and returns a new BigNumber, in such a way that if either
-the corresponding bit in the first operand or the second operand is
-1, then the output is also 1.
+Performs a bitwise OR operation on the current instance and given BigNumber and returns a new BigNumber, in such a way that if either the corresponding bit in the first operand or the second operand is 1, then the output is also 1.
 
 ```ts
 or(num: BigNumber): BigNumber 
@@ -3090,8 +3036,8 @@ Returns a new BigNumber resulting from the bitwise OR operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise OR operation with.
+* **num**
+  * The BigNumber to perform the bitwise OR operation with.
 
 Example
 
@@ -3101,7 +3047,7 @@ const num2 = new BigNumber('20');
 console.log(num1.or(num2).toString());
 ```
 
-#### Method pow
+**Method pow**
 
 Raises the BigNumber instance to the power of the specified BigNumber.
 
@@ -3115,8 +3061,8 @@ The result of raising the BigNumber instance to the power of num.
 
 Argument Details
 
-+ **num**
-  + The exponent to raise the BigNumber instance to.
+* **num**
+  * The exponent to raise the BigNumber instance to.
 
 Example
 
@@ -3126,10 +3072,9 @@ let exponent = new BigNumber(3);
 base.pow(exponent); // Returns BigNumber of value 8
 ```
 
-#### Method redAdd
+**Method redAdd**
 
-Performs addition operation of the current BigNumber with the given number in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs addition operation of the current BigNumber with the given number in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redAdd(num: BigNumber): BigNumber 
@@ -3141,8 +3086,8 @@ Returns a new BigNumber that's the sum of the current BigNumber and the provided
 
 Argument Details
 
-+ **num**
-  + The number to add to the current BigNumber.
+* **num**
+  * The number to add to the current BigNumber.
 
 Example
 
@@ -3153,10 +3098,9 @@ bigNum.toRed(redCtx);
 bigNum.redAdd(new BigNumber(20)); // returns a BigNumber of 30 in reduction context
 ```
 
-#### Method redIAdd
+**Method redIAdd**
 
-Performs in-place addition operation of the current BigNumber with the given number in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs in-place addition operation of the current BigNumber with the given number in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redIAdd(num: BigNumber): BigNumber 
@@ -3168,8 +3112,8 @@ Returns the modified current BigNumber after adding the provided number in the r
 
 Argument Details
 
-+ **num**
-  + The number to add to the current BigNumber.
+* **num**
+  * The number to add to the current BigNumber.
 
 Example
 
@@ -3180,10 +3124,9 @@ bigNum.toRed(redCtx);
 bigNum.redIAdd(new BigNumber(20)); // modifies the bigNum to 30 in reduction context
 ```
 
-#### Method redIMul
+**Method redIMul**
 
-Performs an in-place multiplication of this BigNumber instance with another BigNumber within a reduction context.
-Expects that this BigNumber is within the reduction context i.e., it has been reduced.
+Performs an in-place multiplication of this BigNumber instance with another BigNumber within a reduction context. Expects that this BigNumber is within the reduction context i.e., it has been reduced.
 
 ```ts
 redIMul(num: BigNumber): BigNumber 
@@ -3195,8 +3138,8 @@ A BigNumber that is the result of the in-place multiplication operation, within 
 
 Argument Details
 
-+ **num**
-  + The BigNumber to multiply with the current BigNumber.
+* **num**
+  * The BigNumber to multiply with the current BigNumber.
 
 Example
 
@@ -3206,12 +3149,9 @@ let bigNum2 = new BigNumber('5');
 bigNum1.redIMul(bigNum2);
 ```
 
-#### Method redISqr
+**Method redISqr**
 
-In-place square of a "red" (reduced) BigNumber.
-This function squares the calling BigNumber and overwrites it with the result.
-It only works if the number is "reduced". A number is considered reduced
-if it has a `red` field that points to a reduction context object.
+In-place square of a "red" (reduced) BigNumber. This function squares the calling BigNumber and overwrites it with the result. It only works if the number is "reduced". A number is considered reduced if it has a `red` field that points to a reduction context object.
 
 ```ts
 redISqr(): BigNumber 
@@ -3233,10 +3173,9 @@ num.redISqr();
 console.log(num.toString()); // Outputs: '625' mod the red value
 ```
 
-#### Method redISub
+**Method redISub**
 
-Performs in-place subtraction operation of the current BigNumber with the given number in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs in-place subtraction operation of the current BigNumber with the given number in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redISub(num: BigNumber): BigNumber 
@@ -3248,8 +3187,8 @@ Returns the modified current BigNumber after subtracting the provided number in 
 
 Argument Details
 
-+ **num**
-  + The number to subtract from the current BigNumber.
+* **num**
+  * The number to subtract from the current BigNumber.
 
 Example
 
@@ -3260,10 +3199,9 @@ bigNum.toRed(redCtx);
 bigNum.redISub(new BigNumber(20)); // modifies the bigNum to 10 in reduction context
 ```
 
-#### Method redInvm
+**Method redInvm**
 
-Find multiplicative inverse (reciprocal) in respect to reduction context.
-The method works only on numbers that have a reduction context set.
+Find multiplicative inverse (reciprocal) in respect to reduction context. The method works only on numbers that have a reduction context set.
 
 ```ts
 redInvm(): BigNumber 
@@ -3285,10 +3223,9 @@ a.red = someReductionContext;
 let aInverse = a.redInvm();
 ```
 
-#### Method redMul
+**Method redMul**
 
-Performs multiplication operation of the current BigNumber with the given number in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs multiplication operation of the current BigNumber with the given number in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redMul(num: BigNumber): BigNumber 
@@ -3300,8 +3237,8 @@ Returns a new BigNumber that's the product of the current BigNumber and the prov
 
 Argument Details
 
-+ **num**
-  + The number to multiply with the current BigNumber.
+* **num**
+  * The number to multiply with the current BigNumber.
 
 Example
 
@@ -3312,10 +3249,9 @@ bigNum.toRed(redCtx);
 bigNum.redMul(new BigNumber(20)); // returns a BigNumber of 200 in reduction context
 ```
 
-#### Method redNeg
+**Method redNeg**
 
-Find negative version of this number in respect to reduction context.
-The method works only on numbers that have a reduction context set.
+Find negative version of this number in respect to reduction context. The method works only on numbers that have a reduction context set.
 
 ```ts
 redNeg(): BigNumber 
@@ -3337,10 +3273,9 @@ a.red = someReductionContext;
 let aNeg = a.redNeg();
 ```
 
-#### Method redPow
+**Method redPow**
 
-Raises this number to the power of 'num', in respect to reduction context.
-Note that 'num' must not have a reduction context set.
+Raises this number to the power of 'num', in respect to reduction context. Note that 'num' must not have a reduction context set.
 
 ```ts
 redPow(num: BigNumber): BigNumber 
@@ -3352,8 +3287,8 @@ Returns a BigNumber that is this number raised to the power of 'num', in respect
 
 Argument Details
 
-+ **num**
-  + The exponent to raise this number to.
+* **num**
+  * The exponent to raise this number to.
 
 Throws
 
@@ -3368,10 +3303,9 @@ let b = new BigNumber(3);
 let result = a.redPow(b);  // equivalent to (a^b) mod red
 ```
 
-#### Method redShl
+**Method redShl**
 
-Performs the shift left operation on the current BigNumber in the reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs the shift left operation on the current BigNumber in the reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redShl(num: number): BigNumber 
@@ -3383,8 +3317,8 @@ Returns a new BigNumber after performing the shift left operation on the current
 
 Argument Details
 
-+ **num**
-  + The positions to shift left the current BigNumber.
+* **num**
+  * The positions to shift left the current BigNumber.
 
 Example
 
@@ -3395,12 +3329,9 @@ bigNum.toRed(redCtx);
 bigNum.redShl(2); // returns a BigNumber of 4 in reduction context
 ```
 
-#### Method redSqr
+**Method redSqr**
 
-Square of a "red" (reduced) BigNumber.
-This function squares the calling BigNumber and returns the result.
-It only works if the number is "reduced". A number is considered reduced
-if it has a `red` field that points to a reduction context object.
+Square of a "red" (reduced) BigNumber. This function squares the calling BigNumber and returns the result. It only works if the number is "reduced". A number is considered reduced if it has a `red` field that points to a reduction context object.
 
 ```ts
 redSqr(): BigNumber 
@@ -3422,13 +3353,9 @@ const result = num.redSqr();
 console.log(result.toString()); // Outputs: '625' mod the red value
 ```
 
-#### Method redSqrt
+**Method redSqrt**
 
-Square root of a "red" (reduced) BigNumber.
-This function calculates the square root of the calling BigNumber
-and returns the result. It only works if the number is "reduced".
-A number is considered reduced if it has a `red`
-field that points to a reduction context object.
+Square root of a "red" (reduced) BigNumber. This function calculates the square root of the calling BigNumber and returns the result. It only works if the number is "reduced". A number is considered reduced if it has a `red` field that points to a reduction context object.
 
 ```ts
 redSqrt(): BigNumber 
@@ -3450,10 +3377,9 @@ const result = num.redSqrt();
 console.log(result.toString()); // Outputs: '2' mod the red value
 ```
 
-#### Method redSub
+**Method redSub**
 
-Performs subtraction operation of the current BigNumber with the given number in a reduction context.
-Throws an error in case the number is not in a reduction context.
+Performs subtraction operation of the current BigNumber with the given number in a reduction context. Throws an error in case the number is not in a reduction context.
 
 ```ts
 redSub(num: BigNumber): BigNumber 
@@ -3465,8 +3391,8 @@ Returns a new BigNumber that's the subtraction result of the current BigNumber a
 
 Argument Details
 
-+ **num**
-  + The number to subtract from the current BigNumber.
+* **num**
+  * The number to subtract from the current BigNumber.
 
 Example
 
@@ -3477,10 +3403,9 @@ bigNum.toRed(redCtx);
 bigNum.redSub(new BigNumber(20)); // returns a BigNumber of 10 in reduction context
 ```
 
-#### Method setn
+**Method setn**
 
-Set `bit` of `this` BigNumber. The `bit` is a position in the binary representation,
-and `val` is the value to be set at that position (`0` or `1`).
+Set `bit` of `this` BigNumber. The `bit` is a position in the binary representation, and `val` is the value to be set at that position (`0` or `1`).
 
 ```ts
 setn(bit: number, val: 0 | 1 | true | false): BigNumber 
@@ -3492,10 +3417,10 @@ Returns the BigNumber after setting the value at the bit position.
 
 Argument Details
 
-+ **bit**
-  + The bit position to set.
-+ **val**
-  + The value to set at the bit position.
+* **bit**
+  * The bit position to set.
+* **val**
+  * The value to set at the bit position.
 
 Example
 
@@ -3505,7 +3430,7 @@ num.setn(2, 1);
 console.log(num.toString());
 ```
 
-#### Method shln
+**Method shln**
 
 Performs a bitwise left shift operation on a clone of the BigNumber instance.
 
@@ -3519,8 +3444,8 @@ A new BigNumber, which is the result of the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of positions to shift.
+* **bits**
+  * The number of positions to shift.
 
 Example
 
@@ -3530,7 +3455,7 @@ let shiftedNumber = myNumber.shln(2);
 console.log(shiftedNumber.toString()); // Outputs "16"
 ```
 
-#### Method shrn
+**Method shrn**
 
 Performs a bitwise right shift operation on a clone of the BigNumber instance.
 
@@ -3544,8 +3469,8 @@ A new BigNumber resulting from the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of bits to shift.
+* **bits**
+  * The number of bits to shift.
 
 Example
 
@@ -3555,7 +3480,7 @@ let shiftedNumber = myNumber.shrn(3);
 console.log(shiftedNumber.toString()); // Outputs "2"
 ```
 
-#### Method sqr
+**Method sqr**
 
 Squares the BigNumber instance.
 
@@ -3574,7 +3499,7 @@ const bn = new BigNumber('12345');
 const result = bn.sqr();
 ```
 
-#### Method strip
+**Method strip**
 
 Removes leading zeros.
 
@@ -3584,7 +3509,7 @@ strip(): BigNumber
 
 Returns
 
-- Returns the BigNumber after stripping leading zeros.
+* Returns the BigNumber after stripping leading zeros.
 
 Example
 
@@ -3594,7 +3519,7 @@ bn.strip();
 // bn now represents 0
 ```
 
-#### Method sub
+**Method sub**
 
 Subtract `num` from `this` BigNumber.
 
@@ -3608,8 +3533,8 @@ Returns a new BigNumber which is the result of the subtraction.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to be subtracted from `this` BigNumber.
+* **num**
+  * The BigNumber to be subtracted from `this` BigNumber.
 
 Example
 
@@ -3619,7 +3544,7 @@ const subResult = num1.sub(new BigNumber('10'));
 console.log(subResult.toString());
 ```
 
-#### Method subn
+**Method subn**
 
 Returns a new BigNumber that is the result of subtracting a plain number from the original BigNumber.
 
@@ -3633,8 +3558,8 @@ Returns a new BigNumber which is the difference of the original BigNumber and th
 
 Argument Details
 
-+ **num**
-  + The plain number to subtract.
+* **num**
+  * The plain number to subtract.
 
 Example
 
@@ -3643,7 +3568,7 @@ const myNumber = new BigNumber(52);
 const newNumber = myNumber.subn(2);  // newNumber becomes 50, myNumber doesn't change.
 ```
 
-#### Method testn
+**Method testn**
 
 Tests if the nth bit of the BigNumber is set.
 
@@ -3657,8 +3582,8 @@ A boolean indicating whether the nth bit is set.
 
 Argument Details
 
-+ **bit**
-  + The position of the bit to test.
+* **bit**
+  * The position of the bit to test.
 
 Example
 
@@ -3667,7 +3592,7 @@ let myNumber = new BigNumber(10); // 1010 in binary
 myNumber.testn(1); // Returns true (indicating that the second bit from right is set)
 ```
 
-#### Method toArray
+**Method toArray**
 
 Converts the BigNumber instance to a JavaScript number array.
 
@@ -3681,10 +3606,10 @@ The JavaScript array representation of the BigNumber instance.
 
 Argument Details
 
-+ **endian**
-  + The endian for converting BigNumber to array. Default value is 'be'.
-+ **length**
-  + The length for the resultant array. Default value is undefined.
+* **endian**
+  * The endian for converting BigNumber to array. Default value is 'be'.
+* **length**
+  * The length for the resultant array. Default value is undefined.
 
 Example
 
@@ -3693,10 +3618,9 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.toArray('be', 8);
 ```
 
-#### Method toBitArray
+**Method toBitArray**
 
-Convert a big number to a boolean array representing
-a binary number, where each array index is a bit.
+Convert a big number to a boolean array representing a binary number, where each array index is a bit.
 
 ```ts
 static toBitArray(num: BigNumber): Array<0 | 1> 
@@ -3704,13 +3628,12 @@ static toBitArray(num: BigNumber): Array<0 | 1>
 
 Returns
 
-Returns an array of booleans representing
-a binary number, with each array index being a bit.
+Returns an array of booleans representing a binary number, with each array index being a bit.
 
 Argument Details
 
-+ **num**
-  + The big number to convert.
+* **num**
+  * The big number to convert.
 
 Example
 
@@ -3720,10 +3643,9 @@ const bn = new BigNumber('6'); // binary: 110
 const bits = BigNumber.toBitArray(bn); // [1,1,0]
 ```
 
-#### Method toBitArray
+**Method toBitArray**
 
-Convert this big number to a boolean array representing
-a binary number, where each array index is a bit.
+Convert this big number to a boolean array representing a binary number, where each array index is a bit.
 
 ```ts
 toBitArray(): Array<0 | 1> 
@@ -3741,7 +3663,7 @@ const bn = new BigNumber('6'); // binary: 110
 const bits = bn.toBitArray(); // [ 1, 1, 0 ]
 ```
 
-#### Method toBits
+**Method toBits**
 
 Converts this BigNumber to a number representing the "bits" value in a block header.
 
@@ -3760,7 +3682,7 @@ const bigNumber = new BigNumber(1);
 const bits = bigNumber.toBits();
 ```
 
-#### Method toHex
+**Method toHex**
 
 Converts this BigNumber to a hexadecimal string.
 
@@ -3774,8 +3696,8 @@ Returns a string representing the hexadecimal value of this BigNumber.
 
 Argument Details
 
-+ **length**
-  + The minimum length of the hex string
+* **length**
+  * The minimum length of the hex string
 
 Example
 
@@ -3784,7 +3706,7 @@ const bigNumber = new BigNumber(255);
 const hex = bigNumber.toHex();
 ```
 
-#### Method toJSON
+**Method toJSON**
 
 Converts the BigNumber instance to a JSON-formatted string.
 
@@ -3803,10 +3725,9 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.toJSON();
 ```
 
-#### Method toNumber
+**Method toNumber**
 
-Converts the BigNumber instance to a JavaScript number.
-Please note that JavaScript numbers are only precise up to 53 bits.
+Converts the BigNumber instance to a JavaScript number. Please note that JavaScript numbers are only precise up to 53 bits.
 
 ```ts
 toNumber(): number 
@@ -3827,10 +3748,9 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.toNumber();
 ```
 
-#### Method toRed
+**Method toRed**
 
-Converts a BigNumber to a reduction context ensuring the number is a positive integer and is not already in a reduction context.
-Throws an error in case the number is either negative or already in a reduction context.
+Converts a BigNumber to a reduction context ensuring the number is a positive integer and is not already in a reduction context. Throws an error in case the number is either negative or already in a reduction context.
 
 ```ts
 toRed(ctx: ReductionContext): BigNumber 
@@ -3842,8 +3762,8 @@ Returns the BigNumber in the given ReductionContext.
 
 Argument Details
 
-+ **ctx**
-  + The ReductionContext to convert the BigNumber to.
+* **ctx**
+  * The ReductionContext to convert the BigNumber to.
 
 Example
 
@@ -3853,7 +3773,7 @@ let redCtx = new ReductionContext();
 bigNum.toRed(redCtx);
 ```
 
-#### Method toScriptNum
+**Method toScriptNum**
 
 Converts this BigNumber to a number in the format used in Bitcoin scripts.
 
@@ -3872,7 +3792,7 @@ const bigNumber = new BigNumber(258)
 const num = bigNumber.toScriptNum() // equivalent to bigNumber.toSm('little')
 ```
 
-#### Method toSm
+**Method toSm**
 
 Converts this BigNumber to a signed magnitude number.
 
@@ -3886,8 +3806,8 @@ Returns an array equivalent to this BigNumber interpreted as a signed magnitude 
 
 Argument Details
 
-+ **endian**
-  + Defines endianess. If not provided, big endian is assumed.
+* **endian**
+  * Defines endianess. If not provided, big endian is assumed.
 
 Example
 
@@ -3896,9 +3816,9 @@ const bigNumber = new BigNumber(-1);
 const num = bigNumber.toSm('little'); // [0x81]
 ```
 
-#### Method toString
+**Method toString**
 
-function toString() { [native code] }
+function toString() { \[native code] }
 
 Converts the BigNumber instance to a string representation.
 
@@ -3912,10 +3832,10 @@ The string representation of the BigNumber instance
 
 Argument Details
 
-+ **base**
-  + The base for representing number. Default is 10. Other accepted values are 16 and 'hex'.
-+ **padding**
-  + Represents the minimum number of digits to represent the BigNumber as a string. Default is 1.
+* **base**
+  * The base for representing number. Default is 10. Other accepted values are 16 and 'hex'.
+* **padding**
+  * Represents the minimum number of digits to represent the BigNumber as a string. Default is 1.
 
 Throws
 
@@ -3928,7 +3848,7 @@ const bn = new BigNumber('123456', 10, 'be');
 bn.toString(16); // Converts the BigNumber to a hexadecimal string.
 ```
 
-#### Method toTwos
+**Method toTwos**
 
 Converts this big number to two's complement with a specified bit width.
 
@@ -3942,8 +3862,8 @@ Returns the two's complement of the big number.
 
 Argument Details
 
-+ **width**
-  + The bit width.
+* **width**
+  * The bit width.
 
 Example
 
@@ -3953,10 +3873,9 @@ const bn = new BigNumber('-1234');
 const twosComp = bn.toTwos(16);
 ```
 
-#### Method uand
+**Method uand**
 
-Performs a bitwise AND operation without considering signed bit
-(no negative values) which returns a new BigNumber, similar to the `and` method.
+Performs a bitwise AND operation without considering signed bit (no negative values) which returns a new BigNumber, similar to the `and` method.
 
 ```ts
 uand(num: BigNumber): BigNumber 
@@ -3968,8 +3887,8 @@ Returns new BigNumber resulting from the bitwise AND operation without sign cons
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise AND operation with.
+* **num**
+  * The BigNumber to perform the bitwise AND operation with.
 
 Example
 
@@ -3979,7 +3898,7 @@ const num2 = new BigNumber('20');
 console.log(num1.uand(num2).toString());
 ```
 
-#### Method ucmp
+**Method ucmp**
 
 Performs an unsigned comparison between this BigNumber instance and another.
 
@@ -3993,8 +3912,8 @@ Returns 1 if this BigNumber is bigger, -1 if it is smaller, and 0 if they are eq
 
 Argument Details
 
-+ **num**
-  + The BigNumber instance to compare with.
+* **num**
+  * The BigNumber instance to compare with.
 
 Example
 
@@ -4004,7 +3923,7 @@ let bigNumber2 = new BigNumber('2345');
 let comparisonResult = bigNumber1.ucmp(bigNumber2); // Returns -1
 ```
 
-#### Method umod
+**Method umod**
 
 Returns the remainder after unsigned division of one `BigNumber` by another `BigNumber`.
 
@@ -4014,13 +3933,12 @@ umod(num: BigNumber): BigNumber
 
 Returns
 
-The remainder `BigNumber` after unsigned division.
-Note: Here 'unsigned division' means that signs of the numbers are ignored.
+The remainder `BigNumber` after unsigned division. Note: Here 'unsigned division' means that signs of the numbers are ignored.
 
 Argument Details
 
-+ **num**
-  + The divisor `BigNumber`.
+* **num**
+  * The divisor `BigNumber`.
 
 Example
 
@@ -4030,11 +3948,9 @@ const bigNum2 = new BigNumber('45');
 const remainder = bigNum1.umod(bigNum2); // remainder here would be '10' as signs are ignored.
 ```
 
-#### Method uor
+**Method uor**
 
-Performs a bitwise OR operation on the current instance and given
-BigNumber without considering signed bit(no negative values) and returns a new BigNumber,
-similar to the `or` method.
+Performs a bitwise OR operation on the current instance and given BigNumber without considering signed bit(no negative values) and returns a new BigNumber, similar to the `or` method.
 
 ```ts
 uor(num: BigNumber): BigNumber 
@@ -4046,8 +3962,8 @@ Returns a new BigNumber resulting from the bitwise OR operation without sign con
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise OR operation with.
+* **num**
+  * The BigNumber to perform the bitwise OR operation with.
 
 Example
 
@@ -4057,7 +3973,7 @@ const num2 = new BigNumber('20');
 console.log(num1.uor(num2).toString());
 ```
 
-#### Method ushln
+**Method ushln**
 
 Performs an unsigned bitwise shift left operation on a clone of the BigNumber instance.
 
@@ -4071,8 +3987,8 @@ A new BigNumber resulting from the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of bits to shift.
+* **bits**
+  * The number of bits to shift.
 
 Example
 
@@ -4082,7 +3998,7 @@ let shiftedNumber = myNumber.ushln(2);
 console.log(shiftedNumber.toString()); // Outputs "16"
 ```
 
-#### Method ushrn
+**Method ushrn**
 
 Performs an unsigned bitwise shift right operation on a clone of the BigNumber instance.
 
@@ -4096,8 +4012,8 @@ A new BigNumber resulting from the shift operation.
 
 Argument Details
 
-+ **bits**
-  + The number of bits to shift.
+* **bits**
+  * The number of bits to shift.
 
 Example
 
@@ -4107,7 +4023,7 @@ let shiftedNumber = myNumber.ushrn(2);
 console.log(shiftedNumber.toString()); // Outputs "5"
 ```
 
-#### Method uxor
+**Method uxor**
 
 Performs an unsigned XOR operation on this BigNumber with the supplied BigNumber. Returns a new BigNumber.
 
@@ -4121,8 +4037,8 @@ Returns a new BigNumber resulting from the unsigned bitwise XOR operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber with which the unsigned bitwise XOR operation is to be performed.
+* **num**
+  * The BigNumber with which the unsigned bitwise XOR operation is to be performed.
 
 Example
 
@@ -4132,10 +4048,9 @@ const num2 = new BigNumber('40');
 console.log(num1.uxor(num2).toString()); // Output will be the result of unsigned XOR operation
 ```
 
-#### Method xor
+**Method xor**
 
-Performs a bitwise XOR operation which returns a new BigNumber, and keeps the bits
-set in the result only if the corresponding bits in the operands are different.
+Performs a bitwise XOR operation which returns a new BigNumber, and keeps the bits set in the result only if the corresponding bits in the operands are different.
 
 ```ts
 xor(num: BigNumber): BigNumber 
@@ -4147,8 +4062,8 @@ Returns a new BigNumber resulting from the bitwise XOR operation.
 
 Argument Details
 
-+ **num**
-  + The BigNumber to perform the bitwise XOR operation with.
+* **num**
+  * The BigNumber to perform the bitwise XOR operation with.
 
 Example
 
@@ -4158,7 +4073,7 @@ const num2 = new BigNumber('20');
 console.log(num1.xor(num2).toString());
 ```
 
-#### Method zeroBits
+**Method zeroBits**
 
 Returns the number of trailing zero bits in the big number.
 
@@ -4168,8 +4083,7 @@ zeroBits(): number
 
 Returns
 
-Returns the number of trailing zero bits
-in the binary representation of the big number.
+Returns the number of trailing zero bits in the binary representation of the big number.
 
 Example
 
@@ -4181,17 +4095,15 @@ const zeroBits = bn.zeroBits(); // 3
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: MontgomoryMethod
 
-Represents a Montgomery reduction context, which is a mathematical method
-for performing modular multiplication without division.
+Represents a Montgomery reduction context, which is a mathematical method for performing modular multiplication without division.
 
-Montgomery reduction is an algorithm used mainly in cryptography which can
-help to speed up calculations in contexts where there are many repeated
-computations.
+Montgomery reduction is an algorithm used mainly in cryptography which can help to speed up calculations in contexts where there are many repeated computations.
 
 This class extends the `ReductionContext` class.
 
@@ -4215,7 +4127,7 @@ export default class MontgomoryMethod extends ReductionContext {
 
 <summary>Class MontgomoryMethod Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(m: BigNumber | "k256") 
@@ -4223,10 +4135,10 @@ constructor(m: BigNumber | "k256")
 
 Argument Details
 
-+ **m**
-  + The modulus to be used for the Montgomery method reductions.
+* **m**
+  * The modulus to be used for the Montgomery method reductions.
 
-#### Property minv
+**Property minv**
 
 The modular multiplicative inverse of `m` mod `r`.
 
@@ -4234,7 +4146,7 @@ The modular multiplicative inverse of `m` mod `r`.
 minv: BigNumber
 ```
 
-#### Property r
+**Property r**
 
 The 2^shift, shifted left by the bit length of modulus `m`.
 
@@ -4242,7 +4154,7 @@ The 2^shift, shifted left by the bit length of modulus `m`.
 r: BigNumber
 ```
 
-#### Property r2
+**Property r2**
 
 The square of `r` modulo `m`.
 
@@ -4250,7 +4162,7 @@ The square of `r` modulo `m`.
 r2: BigNumber
 ```
 
-#### Property rinv
+**Property rinv**
 
 The modular multiplicative inverse of `r` mod `m`.
 
@@ -4258,7 +4170,7 @@ The modular multiplicative inverse of `r` mod `m`.
 rinv: BigNumber
 ```
 
-#### Property shift
+**Property shift**
 
 The number of bits in the modulus.
 
@@ -4266,7 +4178,7 @@ The number of bits in the modulus.
 shift: number
 ```
 
-#### Method convertFrom
+**Method convertFrom**
 
 Converts a number from the Montgomery domain back to the original domain.
 
@@ -4280,8 +4192,8 @@ The result of the conversion from the Montgomery domain.
 
 Argument Details
 
-+ **num**
-  + The number to be converted from the Montgomery domain.
+* **num**
+  * The number to be converted from the Montgomery domain.
 
 Example
 
@@ -4290,7 +4202,7 @@ const montMethod = new MontgomoryMethod(m);
 const convertedNum = montMethod.convertFrom(num);
 ```
 
-#### Method convertTo
+**Method convertTo**
 
 Converts a number into the Montgomery domain.
 
@@ -4304,8 +4216,8 @@ The result of the conversion into the Montgomery domain.
 
 Argument Details
 
-+ **num**
-  + The number to be converted into the Montgomery domain.
+* **num**
+  * The number to be converted into the Montgomery domain.
 
 Example
 
@@ -4314,7 +4226,7 @@ const montMethod = new MontgomoryMethod(m);
 const convertedNum = montMethod.convertTo(num);
 ```
 
-#### Method imul
+**Method imul**
 
 Performs an in-place multiplication of two numbers in the Montgomery domain.
 
@@ -4328,10 +4240,10 @@ The result of the in-place multiplication.
 
 Argument Details
 
-+ **a**
-  + The first number to multiply.
-+ **b**
-  + The second number to multiply.
+* **a**
+  * The first number to multiply.
+* **b**
+  * The second number to multiply.
 
 Example
 
@@ -4340,7 +4252,7 @@ const montMethod = new MontgomoryMethod(m);
 const product = montMethod.imul(a, b);
 ```
 
-#### Method invm
+**Method invm**
 
 Calculates the modular multiplicative inverse of a number in the Montgomery domain.
 
@@ -4354,8 +4266,8 @@ The modular multiplicative inverse of 'a'.
 
 Argument Details
 
-+ **a**
-  + The number to compute the modular multiplicative inverse of.
+* **a**
+  * The number to compute the modular multiplicative inverse of.
 
 Example
 
@@ -4364,7 +4276,7 @@ const montMethod = new MontgomoryMethod(m);
 const inverse = montMethod.invm(a);
 ```
 
-#### Method mul
+**Method mul**
 
 Performs the multiplication of two numbers in the Montgomery domain.
 
@@ -4378,10 +4290,10 @@ The result of the multiplication.
 
 Argument Details
 
-+ **a**
-  + The first number to multiply.
-+ **b**
-  + The second number to multiply.
+* **a**
+  * The first number to multiply.
+* **b**
+  * The second number to multiply.
 
 Example
 
@@ -4392,13 +4304,13 @@ const product = montMethod.mul(a, b);
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: BasePoint
 
-Base class for Point (affine coordinates) and JacobianPoint classes,
-defining their curve and type.
+Base class for Point (affine coordinates) and JacobianPoint classes, defining their curve and type.
 
 ```ts
 export default abstract class BasePoint {
@@ -4419,13 +4331,13 @@ export default abstract class BasePoint {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: JacobianPoint
 
-The `JacobianPoint` class extends the `BasePoint` class for handling Jacobian coordinates on an Elliptic Curve.
-This class defines the properties and the methods needed to work with points in Jacobian coordinates.
+The `JacobianPoint` class extends the `BasePoint` class for handling Jacobian coordinates on an Elliptic Curve. This class defines the properties and the methods needed to work with points in Jacobian coordinates.
 
 The Jacobian coordinates represent a point (x, y, z) on an Elliptic Curve such that the usual (x, y) coordinates are given by (x/z^2, y/z^3).
 
@@ -4459,7 +4371,7 @@ export default class JacobianPoint extends BasePoint {
 
 <summary>Class JacobianPoint Details</summary>
 
-#### Constructor
+**Constructor**
 
 Constructs a new `JacobianPoint` instance.
 
@@ -4469,15 +4381,12 @@ constructor(x: string | BigNumber | null, y: string | BigNumber | null, z: strin
 
 Argument Details
 
-+ **x**
-  + If `null`, the x-coordinate will default to the curve's defined 'one' constant.
-If `x` is not a BigNumber, `x` will be converted to a `BigNumber` assuming it is a hex string.
-+ **y**
-  + If `null`, the y-coordinate will default to the curve's defined 'one' constant.
-If `y` is not a BigNumber, `y` will be converted to a `BigNumber` assuming it is a hex string.
-+ **z**
-  + If `null`, the z-coordinate will default to 0.
-If `z` is not a BigNumber, `z` will be converted to a `BigNumber` assuming it is a hex string.
+* **x**
+  * If `null`, the x-coordinate will default to the curve's defined 'one' constant. If `x` is not a BigNumber, `x` will be converted to a `BigNumber` assuming it is a hex string.
+* **y**
+  * If `null`, the y-coordinate will default to the curve's defined 'one' constant. If `y` is not a BigNumber, `y` will be converted to a `BigNumber` assuming it is a hex string.
+* **z**
+  * If `null`, the z-coordinate will default to 0. If `z` is not a BigNumber, `z` will be converted to a `BigNumber` assuming it is a hex string.
 
 Example
 
@@ -4486,7 +4395,7 @@ const pointJ1 = new JacobianPoint(null, null, null); // creates point at infinit
 const pointJ2 = new JacobianPoint('3', '4', '1'); // creates point (3, 4, 1)
 ```
 
-#### Property x
+**Property x**
 
 The `x` coordinate of the point in the Jacobian form.
 
@@ -4494,7 +4403,7 @@ The `x` coordinate of the point in the Jacobian form.
 x: BigNumber
 ```
 
-#### Property y
+**Property y**
 
 The `y` coordinate of the point in the Jacobian form.
 
@@ -4502,7 +4411,7 @@ The `y` coordinate of the point in the Jacobian form.
 y: BigNumber
 ```
 
-#### Property z
+**Property z**
 
 The `z` coordinate of the point in the Jacobian form.
 
@@ -4510,7 +4419,7 @@ The `z` coordinate of the point in the Jacobian form.
 z: BigNumber
 ```
 
-#### Property zOne
+**Property zOne**
 
 Flag that indicates if the `z` coordinate is one.
 
@@ -4518,11 +4427,9 @@ Flag that indicates if the `z` coordinate is one.
 zOne: boolean
 ```
 
-#### Method add
+**Method add**
 
-Addition operation in the Jacobian coordinates. It takes a Jacobian point as an argument
-and returns a new Jacobian point as a result of the addition. In the special cases,
-when either one of the points is the point at infinity, it will return the other point.
+Addition operation in the Jacobian coordinates. It takes a Jacobian point as an argument and returns a new Jacobian point as a result of the addition. In the special cases, when either one of the points is the point at infinity, it will return the other point.
 
 ```ts
 add(p: JacobianPoint): JacobianPoint 
@@ -4534,8 +4441,8 @@ Returns a new Jacobian point as the result of the addition.
 
 Argument Details
 
-+ **p**
-  + The Jacobian point to be added.
+* **p**
+  * The Jacobian point to be added.
 
 Example
 
@@ -4545,7 +4452,7 @@ const p2 = new JacobianPoint(x2, y2, z2)
 const result = p1.add(p2)
 ```
 
-#### Method dbl
+**Method dbl**
 
 Point doubling operation in the Jacobian coordinates. A special case is when the point is the point at infinity, in this case, this function will return the point itself.
 
@@ -4564,7 +4471,7 @@ const jp = new JacobianPoint(x, y, z)
 const result = jp.dbl()
 ```
 
-#### Method dblp
+**Method dblp**
 
 Multiple doubling operation. It doubles the Jacobian point as many times as the pow parameter specifies. If pow is 0 or the point is the point at infinity, it will return the point itself.
 
@@ -4578,8 +4485,8 @@ Returns a new Jacobian point as the result of multiple doublings.
 
 Argument Details
 
-+ **pow**
-  + The number of times the point should be doubled.
+* **pow**
+  * The number of times the point should be doubled.
 
 Example
 
@@ -4588,7 +4495,7 @@ const jp = new JacobianPoint(x, y, z)
 const result = jp.dblp(3)
 ```
 
-#### Method eq
+**Method eq**
 
 Equality check operation. It checks whether the affine or Jacobian point is equal to this Jacobian point.
 
@@ -4602,8 +4509,8 @@ Returns true if the points are equal, otherwise returns false.
 
 Argument Details
 
-+ **p**
-  + The affine or Jacobian point to compare with.
+* **p**
+  * The affine or Jacobian point to compare with.
 
 Example
 
@@ -4613,11 +4520,9 @@ const jp2 = new JacobianPoint(x2, y2, z2)
 const areEqual = jp1.eq(jp2)
 ```
 
-#### Method eqXToP
+**Method eqXToP**
 
-Equality check operation in relation to an x coordinate of a point in projective coordinates.
-It checks whether the x coordinate of the Jacobian point is equal to the provided x coordinate
-of a point in projective coordinates.
+Equality check operation in relation to an x coordinate of a point in projective coordinates. It checks whether the x coordinate of the Jacobian point is equal to the provided x coordinate of a point in projective coordinates.
 
 ```ts
 eqXToP(x: BigNumber): boolean 
@@ -4629,8 +4534,8 @@ Returns true if the x coordinates are equal, otherwise returns false.
 
 Argument Details
 
-+ **x**
-  + The x coordinate of a point in projective coordinates.
+* **x**
+  * The x coordinate of a point in projective coordinates.
 
 Example
 
@@ -4639,7 +4544,7 @@ const jp = new JacobianPoint(x1, y1, z1)
 const isXEqual = jp.eqXToP(x2)
 ```
 
-#### Method inspect
+**Method inspect**
 
 Returns the string representation of the JacobianPoint instance.
 
@@ -4649,7 +4554,7 @@ inspect(): string
 
 Returns
 
-Returns the string description of the JacobianPoint. If the JacobianPoint represents a point at infinity, the return value of this function is '<EC JPoint Infinity>'. For a normal point, it returns the string description format as '<EC JPoint x: x-coordinate y: y-coordinate z: z-coordinate>'.
+Returns the string description of the JacobianPoint. If the JacobianPoint represents a point at infinity, the return value of this function is ''. For a normal point, it returns the string description format as ''.
 
 Example
 
@@ -4658,7 +4563,7 @@ const point = new JacobianPoint('5', '6', '1');
 console.log(point.inspect()); // Output: '<EC JPoint x: 5 y: 6 z: 1>'
 ```
 
-#### Method isInfinity
+**Method isInfinity**
 
 Checks whether the JacobianPoint instance represents a point at infinity.
 
@@ -4677,11 +4582,9 @@ const point = new JacobianPoint('5', '6', '0');
 console.log(point.isInfinity()); // Output: true
 ```
 
-#### Method mixedAdd
+**Method mixedAdd**
 
-Mixed addition operation. This function combines the standard point addition with
-the transformation from the affine to Jacobian coordinates. It first converts
-the affine point to Jacobian, and then preforms the addition.
+Mixed addition operation. This function combines the standard point addition with the transformation from the affine to Jacobian coordinates. It first converts the affine point to Jacobian, and then preforms the addition.
 
 ```ts
 mixedAdd(p: Point): JacobianPoint 
@@ -4693,8 +4596,8 @@ Returns the result of the mixed addition as a new Jacobian point.
 
 Argument Details
 
-+ **p**
-  + The affine point to be added.
+* **p**
+  * The affine point to be added.
 
 Example
 
@@ -4704,7 +4607,7 @@ const ap = new Point(x2, y2)
 const result = jp.mixedAdd(ap)
 ```
 
-#### Method neg
+**Method neg**
 
 Negation operation. It returns the additive inverse of the Jacobian point.
 
@@ -4723,7 +4626,7 @@ const jp = new JacobianPoint(x, y, z)
 const result = jp.neg()
 ```
 
-#### Method toP
+**Method toP**
 
 Converts the `JacobianPoint` object instance to standard affine `Point` format and returns `Point` type.
 
@@ -4746,15 +4649,13 @@ const pointP = pointJ.toP();  // The point in affine coordinates.
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: RIPEMD160
 
-An implementation of RIPEMD160 cryptographic hash function. Extends the BaseHash class.
-It provides a way to compute a 'digest' for any kind of input data; transforming the data
-into a unique output of fixed size. The output is deterministic; it will always be
-the same for the same input.
+An implementation of RIPEMD160 cryptographic hash function. Extends the BaseHash class. It provides a way to compute a 'digest' for any kind of input data; transforming the data into a unique output of fixed size. The output is deterministic; it will always be the same for the same input.
 
 Example
 
@@ -4776,7 +4677,7 @@ export class RIPEMD160 extends BaseHash {
 
 <summary>Class RIPEMD160 Details</summary>
 
-#### Property h
+**Property h**
 
 Array that is updated iteratively as part of hashing computation.
 
@@ -4786,15 +4687,13 @@ h: number[]
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SHA256
 
-An implementation of SHA256 cryptographic hash function. Extends the BaseHash class.
-It provides a way to compute a 'digest' for any kind of input data; transforming the data
-into a unique output of fixed size. The output is deterministic; it will always be
-the same for the same input.
+An implementation of SHA256 cryptographic hash function. Extends the BaseHash class. It provides a way to compute a 'digest' for any kind of input data; transforming the data into a unique output of fixed size. The output is deterministic; it will always be the same for the same input.
 
 Example
 
@@ -4819,7 +4718,7 @@ export class SHA256 extends BaseHash {
 
 <summary>Class SHA256 Details</summary>
 
-#### Property W
+**Property W**
 
 Provides a way to recycle usage of the array memory.
 
@@ -4827,7 +4726,7 @@ Provides a way to recycle usage of the array memory.
 W: number[]
 ```
 
-#### Property h
+**Property h**
 
 The initial hash constants
 
@@ -4835,7 +4734,7 @@ The initial hash constants
 h: number[]
 ```
 
-#### Property k
+**Property k**
 
 The round constants used for each round of SHA-256
 
@@ -4845,15 +4744,13 @@ k: number[]
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SHA1
 
-An implementation of SHA1 cryptographic hash function. Extends the BaseHash class.
-It provides a way to compute a 'digest' for any kind of input data; transforming the data
-into a unique output of fixed size. The output is deterministic; it will always be
-the same for the same input.
+An implementation of SHA1 cryptographic hash function. Extends the BaseHash class. It provides a way to compute a 'digest' for any kind of input data; transforming the data into a unique output of fixed size. The output is deterministic; it will always be the same for the same input.
 
 Example
 
@@ -4877,7 +4774,7 @@ export class SHA1 extends BaseHash {
 
 <summary>Class SHA1 Details</summary>
 
-#### Property W
+**Property W**
 
 Provides a way to recycle usage of the array memory.
 
@@ -4885,7 +4782,7 @@ Provides a way to recycle usage of the array memory.
 W: number[]
 ```
 
-#### Property h
+**Property h**
 
 The initial hash constants.
 
@@ -4893,7 +4790,7 @@ The initial hash constants.
 h: number[]
 ```
 
-#### Property k
+**Property k**
 
 The round constants used for each round of SHA-1.
 
@@ -4903,15 +4800,13 @@ k: number[]
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SHA512
 
-An implementation of SHA512 cryptographic hash function. Extends the BaseHash class.
-It provides a way to compute a 'digest' for any kind of input data; transforming the data
-into a unique output of fixed size. The output is deterministic; it will always be
-the same for the same input.
+An implementation of SHA512 cryptographic hash function. Extends the BaseHash class. It provides a way to compute a 'digest' for any kind of input data; transforming the data into a unique output of fixed size. The output is deterministic; it will always be the same for the same input.
 
 Example
 
@@ -4936,7 +4831,7 @@ export class SHA512 extends BaseHash {
 
 <summary>Class SHA512 Details</summary>
 
-#### Property W
+**Property W**
 
 Provides a way to recycle usage of the array memory.
 
@@ -4944,7 +4839,7 @@ Provides a way to recycle usage of the array memory.
 W: number[]
 ```
 
-#### Property h
+**Property h**
 
 The initial hash constants.
 
@@ -4952,7 +4847,7 @@ The initial hash constants.
 h: number[]
 ```
 
-#### Property k
+**Property k**
 
 The round constants used for each round of SHA-512.
 
@@ -4962,9 +4857,10 @@ k: number[]
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SHA256HMAC
 
 The `SHA256HMAC` class is used to create Hash-based Message Authentication Code (HMAC) using the SHA-256 cryptographic hash function.
@@ -4990,13 +4886,11 @@ export class SHA256HMAC {
 
 <summary>Class SHA256HMAC Details</summary>
 
-#### Constructor
+**Constructor**
 
 The constructor for the `SHA256HMAC` class.
 
-It initializes the `SHA256HMAC` object and sets up the inner and outer padded keys.
-If the key size is larger than the blockSize, it is digested using SHA-256.
-If the key size is less than the blockSize, it is padded with zeroes.
+It initializes the `SHA256HMAC` object and sets up the inner and outer padded keys. If the key size is larger than the blockSize, it is digested using SHA-256. If the key size is less than the blockSize, it is padded with zeroes.
 
 ```ts
 constructor(key: number[] | string) 
@@ -5004,8 +4898,8 @@ constructor(key: number[] | string)
 
 Argument Details
 
-+ **key**
-  + The key to use to create the HMAC. Can be a number array or a string in hexadecimal format.
+* **key**
+  * The key to use to create the HMAC. Can be a number array or a string in hexadecimal format.
 
 Example
 
@@ -5013,7 +4907,7 @@ Example
 const myHMAC = new SHA256HMAC('deadbeef');
 ```
 
-#### Property blockSize
+**Property blockSize**
 
 The block size for the SHA-256 hash function, in bytes. It's set to 64 bytes.
 
@@ -5021,7 +4915,7 @@ The block size for the SHA-256 hash function, in bytes. It's set to 64 bytes.
 blockSize = 64
 ```
 
-#### Property inner
+**Property inner**
 
 Represents the inner hash of SHA-256.
 
@@ -5029,7 +4923,7 @@ Represents the inner hash of SHA-256.
 inner: SHA256
 ```
 
-#### Property outSize
+**Property outSize**
 
 The output size of the SHA-256 hash function, in bytes. It's set to 32 bytes.
 
@@ -5037,7 +4931,7 @@ The output size of the SHA-256 hash function, in bytes. It's set to 32 bytes.
 outSize = 32
 ```
 
-#### Property outer
+**Property outer**
 
 Represents the outer hash of SHA-256.
 
@@ -5045,7 +4939,7 @@ Represents the outer hash of SHA-256.
 outer: SHA256
 ```
 
-#### Method digest
+**Method digest**
 
 Finalizes the HMAC computation and returns the resultant hash.
 
@@ -5063,7 +4957,7 @@ Example
 let hashedMessage = myHMAC.digest();
 ```
 
-#### Method digestHex
+**Method digestHex**
 
 Finalizes the HMAC computation and returns the resultant hash as a hex string.
 
@@ -5081,7 +4975,7 @@ Example
 let hashedMessage = myHMAC.digestHex();
 ```
 
-#### Method update
+**Method update**
 
 Updates the `SHA256HMAC` object with part of the message to be hashed.
 
@@ -5095,10 +4989,10 @@ Returns the instance of `SHA256HMAC` for chaining calls.
 
 Argument Details
 
-+ **msg**
-  + Part of the message to hash. Can be a number array or a string.
-+ **enc**
-  + If 'hex', then the input is encoded as hexadecimal. If undefined or not 'hex', then no encoding is performed.
+* **msg**
+  * Part of the message to hash. Can be a number array or a string.
+* **enc**
+  * If 'hex', then the input is encoded as hexadecimal. If undefined or not 'hex', then no encoding is performed.
 
 Example
 
@@ -5108,9 +5002,10 @@ myHMAC.update('deadbeef', 'hex');
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SHA512HMAC
 
 The `SHA512HMAC` class is used to create Hash-based Message Authentication Code (HMAC) using the SHA-512 cryptographic hash function.
@@ -5136,13 +5031,11 @@ export class SHA512HMAC {
 
 <summary>Class SHA512HMAC Details</summary>
 
-#### Constructor
+**Constructor**
 
 The constructor for the `SHA512HMAC` class.
 
-It initializes the `SHA512HMAC` object and sets up the inner and outer padded keys.
-If the key size is larger than the blockSize, it is digested using SHA-512.
-If the key size is less than the blockSize, it is padded with zeroes.
+It initializes the `SHA512HMAC` object and sets up the inner and outer padded keys. If the key size is larger than the blockSize, it is digested using SHA-512. If the key size is less than the blockSize, it is padded with zeroes.
 
 ```ts
 constructor(key: number[] | string) 
@@ -5150,8 +5043,8 @@ constructor(key: number[] | string)
 
 Argument Details
 
-+ **key**
-  + The key to use to create the HMAC. Can be a number array or a string in hexadecimal format.
+* **key**
+  * The key to use to create the HMAC. Can be a number array or a string in hexadecimal format.
 
 Example
 
@@ -5159,7 +5052,7 @@ Example
 const myHMAC = new SHA512HMAC('deadbeef');
 ```
 
-#### Property blockSize
+**Property blockSize**
 
 The block size for the SHA-512 hash function, in bytes. It's set to 128 bytes.
 
@@ -5167,7 +5060,7 @@ The block size for the SHA-512 hash function, in bytes. It's set to 128 bytes.
 blockSize = 128
 ```
 
-#### Property inner
+**Property inner**
 
 Represents the inner hash of SHA-512.
 
@@ -5175,7 +5068,7 @@ Represents the inner hash of SHA-512.
 inner: SHA512
 ```
 
-#### Property outSize
+**Property outSize**
 
 The output size of the SHA-512 hash function, in bytes. It's set to 64 bytes.
 
@@ -5183,7 +5076,7 @@ The output size of the SHA-512 hash function, in bytes. It's set to 64 bytes.
 outSize = 32
 ```
 
-#### Property outer
+**Property outer**
 
 Represents the outer hash of SHA-512.
 
@@ -5191,7 +5084,7 @@ Represents the outer hash of SHA-512.
 outer: SHA512
 ```
 
-#### Method digest
+**Method digest**
 
 Finalizes the HMAC computation and returns the resultant hash.
 
@@ -5209,7 +5102,7 @@ Example
 let hashedMessage = myHMAC.digest();
 ```
 
-#### Method digestHex
+**Method digestHex**
 
 Finalizes the HMAC computation and returns the resultant hash as a hex string.
 
@@ -5227,7 +5120,7 @@ Example
 let hashedMessage = myHMAC.digestHex();
 ```
 
-#### Method update
+**Method update**
 
 Updates the `SHA512HMAC` object with part of the message to be hashed.
 
@@ -5241,10 +5134,10 @@ Returns the instance of `SHA512HMAC` for chaining calls.
 
 Argument Details
 
-+ **msg**
-  + Part of the message to hash. Can be a number array or a string.
-+ **enc**
-  + If 'hex', then the input is encoded as hexadecimal. If undefined or not 'hex', then no encoding is performed.
+* **msg**
+  * Part of the message to hash. Can be a number array or a string.
+* **enc**
+  * If 'hex', then the input is encoded as hexadecimal. If undefined or not 'hex', then no encoding is performed.
 
 Example
 
@@ -5254,9 +5147,10 @@ myHMAC.update('deadbeef', 'hex');
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: Writer
 
 ```ts
@@ -5287,9 +5181,10 @@ export class Writer {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: Reader
 
 ```ts
@@ -5318,14 +5213,13 @@ export class Reader {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: Point
 
-`Point` class is a representation of an elliptic curve point with affine coordinates.
-It extends the functionality of BasePoint and carries x, y coordinates of point on the curve.
-It also introduces new methods for handling Point operations in elliptic curve.
+`Point` class is a representation of an elliptic curve point with affine coordinates. It extends the functionality of BasePoint and carries x, y coordinates of point on the curve. It also introduces new methods for handling Point operations in elliptic curve.
 
 ```ts
 export default class Point extends BasePoint {
@@ -5375,7 +5269,7 @@ export default class Point extends BasePoint {
 
 <summary>Class Point Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(x: BigNumber | number | number[] | string | null, y: BigNumber | number | number[] | string | null, isRed: boolean = true) 
@@ -5383,12 +5277,12 @@ constructor(x: BigNumber | number | number[] | string | null, y: BigNumber | num
 
 Argument Details
 
-+ **x**
-  + The x-coordinate of the point. May be a number, a BigNumber, a string (which will be interpreted as hex), a number array, or null. If null, an "Infinity" point is constructed.
-+ **y**
-  + The y-coordinate of the point, similar to x.
-+ **isRed**
-  + A boolean indicating if the point is a member of the field of integers modulo the k256 prime. Default is true.
+* **x**
+  * The x-coordinate of the point. May be a number, a BigNumber, a string (which will be interpreted as hex), a number array, or null. If null, an "Infinity" point is constructed.
+* **y**
+  * The y-coordinate of the point, similar to x.
+* **isRed**
+  * A boolean indicating if the point is a member of the field of integers modulo the k256 prime. Default is true.
 
 Example
 
@@ -5397,7 +5291,7 @@ new Point('abc123', 'def456');
 new Point(null, null); // Generates Infinity point.
 ```
 
-#### Property inf
+**Property inf**
 
 Flag to record if the point is at infinity in the Elliptic Curve.
 
@@ -5405,7 +5299,7 @@ Flag to record if the point is at infinity in the Elliptic Curve.
 inf: boolean
 ```
 
-#### Property x
+**Property x**
 
 The x-coordinate of the point.
 
@@ -5413,7 +5307,7 @@ The x-coordinate of the point.
 x: BigNumber | null
 ```
 
-#### Property y
+**Property y**
 
 The y-coordinate of the point.
 
@@ -5421,7 +5315,7 @@ The y-coordinate of the point.
 y: BigNumber | null
 ```
 
-#### Method add
+**Method add**
 
 Adds another Point to this Point, returning a new Point.
 
@@ -5435,8 +5329,8 @@ A new Point that results from the addition.
 
 Argument Details
 
-+ **p**
-  + The Point to add to this one.
+* **p**
+  * The Point to add to this one.
 
 Example
 
@@ -5446,7 +5340,7 @@ const p2 = new Point(2, 3);
 const result = p1.add(p2);
 ```
 
-#### Method dbl
+**Method dbl**
 
 Doubles the current point.
 
@@ -5461,12 +5355,9 @@ const P = new Point('123', '456');
 const result = P.dbl();
 ```
 
-#### Method dblp
+**Method dblp**
 
-Performs the "doubling" operation on the Point a given number of times.
-This is used in elliptic curve operations to perform multiplication by 2, multiple times.
-If the point is at infinity, it simply returns the point because doubling
-a point at infinity is still infinity.
+Performs the "doubling" operation on the Point a given number of times. This is used in elliptic curve operations to perform multiplication by 2, multiple times. If the point is at infinity, it simply returns the point because doubling a point at infinity is still infinity.
 
 ```ts
 dblp(k: number): Point 
@@ -5478,8 +5369,8 @@ The Point after 'k' "doubling" operations have been performed.
 
 Argument Details
 
-+ **k**
-  + The number of times the "doubling" operation is to be performed on the Point.
+* **k**
+  * The number of times the "doubling" operation is to be performed on the Point.
 
 Example
 
@@ -5488,10 +5379,9 @@ const p = new Point(5, 20);
 const doubledPoint = p.dblp(10); // returns the point after "doubled" 10 times
 ```
 
-#### Method encode
+**Method encode**
 
-Encodes the coordinates of a point into an array or a hexadecimal string.
-The details of encoding are determined by the optional compact and enc parameters.
+Encodes the coordinates of a point into an array or a hexadecimal string. The details of encoding are determined by the optional compact and enc parameters.
 
 ```ts
 encode(compact: boolean = true, enc?: "hex"): number[] | string 
@@ -5503,10 +5393,10 @@ If enc is undefined, a byte array representation of the point will be returned. 
 
 Argument Details
 
-+ **compact**
-  + If true, an additional prefix byte 0x02 or 0x03 based on the 'y' coordinate being even or odd respectively is used. If false, byte 0x04 is used.
-+ **enc**
-  + Expects the string 'hex' if hexadecimal string encoding is required instead of an array of numbers.
+* **compact**
+  * If true, an additional prefix byte 0x02 or 0x03 based on the 'y' coordinate being even or odd respectively is used. If false, byte 0x04 is used.
+* **enc**
+  * Expects the string 'hex' if hexadecimal string encoding is required instead of an array of numbers.
 
 Throws
 
@@ -5520,7 +5410,7 @@ const encodedPointArray = aPoint.encode();
 const encodedPointHex = aPoint.encode(true, 'hex');
 ```
 
-#### Method eq
+**Method eq**
 
 Checks if the Point instance is equal to another given Point.
 
@@ -5534,8 +5424,8 @@ Whether the two Point instances are equal. Both the 'x' and 'y' coordinates have
 
 Argument Details
 
-+ **p**
-  + The Point to be checked if equal to the current instance.
+* **p**
+  * The Point to be checked if equal to the current instance.
 
 Example
 
@@ -5545,11 +5435,9 @@ const p2 = new Point(5, 20);
 const areEqual = p1.eq(p2); // returns true
 ```
 
-#### Method fromJSON
+**Method fromJSON**
 
-Generates a point from a serialized JSON object. The function accounts for different options in the JSON object,
-including precomputed values for optimization of EC operations, and calls another helper function to turn nested
-JSON points into proper Point objects.
+Generates a point from a serialized JSON object. The function accounts for different options in the JSON object, including precomputed values for optimization of EC operations, and calls another helper function to turn nested JSON points into proper Point objects.
 
 ```ts
 static fromJSON(obj: string | any[], isRed: boolean): Point 
@@ -5561,10 +5449,10 @@ Returns a new point based on the deserialized JSON object.
 
 Argument Details
 
-+ **obj**
-  + An object or array that holds the data for the point.
-+ **isRed**
-  + A boolean to direct how the Point is constructed from the JSON object.
+* **obj**
+  * An object or array that holds the data for the point.
+* **isRed**
+  * A boolean to direct how the Point is constructed from the JSON object.
 
 Example
 
@@ -5573,11 +5461,9 @@ const serializedPoint = '{"x":52,"y":15}';
 const point = Point.fromJSON(serializedPoint, true);
 ```
 
-#### Method fromString
+**Method fromString**
 
-Creates a point object from a given string. This string can represent coordinates in hex format, or points
-in multiple established formats.
-The function verifies the integrity of the provided data and throws errors if inconsistencies are found.
+Creates a point object from a given string. This string can represent coordinates in hex format, or points in multiple established formats. The function verifies the integrity of the provided data and throws errors if inconsistencies are found.
 
 ```ts
 static fromString(str: string): Point 
@@ -5589,8 +5475,8 @@ Returns a new point representing the given string.
 
 Argument Details
 
-+ **str**
-  + The point representation string.
+* **str**
+  * The point representation string.
 
 Throws
 
@@ -5605,10 +5491,9 @@ const pointStr = 'abcdef';
 const point = Point.fromString(pointStr);
 ```
 
-#### Method fromX
+**Method fromX**
 
-Generates a point from an x coordinate and a boolean indicating whether the corresponding
-y coordinate is odd.
+Generates a point from an x coordinate and a boolean indicating whether the corresponding y coordinate is odd.
 
 ```ts
 static fromX(x: BigNumber | number | number[] | string, odd: boolean): Point 
@@ -5620,10 +5505,10 @@ Returns the new point.
 
 Argument Details
 
-+ **x**
-  + The x coordinate of the point.
-+ **odd**
-  + Boolean indicating whether the corresponding y coordinate is odd or not.
+* **x**
+  * The x coordinate of the point.
+* **odd**
+  * Boolean indicating whether the corresponding y coordinate is odd or not.
 
 Throws
 
@@ -5636,7 +5521,7 @@ const xCoordinate = new BigNumber('10');
 const point = Point.fromX(xCoordinate, true);
 ```
 
-#### Method getX
+**Method getX**
 
 Returns X coordinate of point
 
@@ -5651,7 +5536,7 @@ const P = new Point('123', '456');
 const x = P.getX();
 ```
 
-#### Method getY
+**Method getY**
 
 Returns X coordinate of point
 
@@ -5666,7 +5551,7 @@ const P = new Point('123', '456');
 const x = P.getX();
 ```
 
-#### Method inspect
+**Method inspect**
 
 Provides the point coordinates in a human-readable string format for debugging purposes.
 
@@ -5676,7 +5561,7 @@ inspect(): string
 
 Returns
 
-String of the format '<EC Point x: x-coordinate y: y-coordinate>', or '<EC Point Infinity>' if the point is at infinity.
+String of the format '', or '' if the point is at infinity.
 
 Example
 
@@ -5685,7 +5570,7 @@ const aPoint = new Point(x, y);
 console.log(aPoint.inspect());
 ```
 
-#### Method isInfinity
+**Method isInfinity**
 
 Checks if the point is at infinity.
 
@@ -5704,10 +5589,9 @@ const p = new Point(null, null);
 console.log(p.isInfinity()); // outputs: true
 ```
 
-#### Method jmulAdd
+**Method jmulAdd**
 
-Performs the Jacobian multiplication and addition operation in a single
-step. Instead of returning a regular Point, the result is a JacobianPoint.
+Performs the Jacobian multiplication and addition operation in a single step. Instead of returning a regular Point, the result is a JacobianPoint.
 
 ```ts
 jmulAdd(k1: BigNumber, p2: Point, k2: BigNumber): JPoint 
@@ -5719,12 +5603,12 @@ A JacobianPoint that results from the combined multiplication and addition opera
 
 Argument Details
 
-+ **k1**
-  + The scalar value to multiply this Point by.
-+ **p2**
-  + The other Point to be involved in the operation
-+ **k2**
-  + The scalar value to multiply the Point p2 by.
+* **k1**
+  * The scalar value to multiply this Point by.
+* **p2**
+  * The other Point to be involved in the operation
+* **k2**
+  * The scalar value to multiply the Point p2 by.
 
 Example
 
@@ -5734,7 +5618,7 @@ const p2 = new Point(2, 3);
 const result = p1.jmulAdd(2, p2, 3);
 ```
 
-#### Method mul
+**Method mul**
 
 Multiplies this Point by a scalar value, returning a new Point.
 
@@ -5748,8 +5632,8 @@ A new Point that results from the multiplication.
 
 Argument Details
 
-+ **k**
-  + The scalar value to multiply this Point by.
+* **k**
+  * The scalar value to multiply this Point by.
 
 Example
 
@@ -5758,10 +5642,9 @@ const p = new Point(1, 2);
 const result = p.mul(2); // this doubles the Point
 ```
 
-#### Method mulAdd
+**Method mulAdd**
 
-Performs a multiplication and addition operation in a single step.
-Multiplies this Point by k1, adds the resulting Point to the result of p2 multiplied by k2.
+Performs a multiplication and addition operation in a single step. Multiplies this Point by k1, adds the resulting Point to the result of p2 multiplied by k2.
 
 ```ts
 mulAdd(k1: BigNumber, p2: Point, k2: BigNumber): Point 
@@ -5773,12 +5656,12 @@ A Point that results from the combined multiplication and addition operations.
 
 Argument Details
 
-+ **k1**
-  + The scalar value to multiply this Point by.
-+ **p2**
-  + The other Point to be involved in the operation.
-+ **k2**
-  + The scalar value to multiply the Point p2 by.
+* **k1**
+  * The scalar value to multiply this Point by.
+* **p2**
+  * The other Point to be involved in the operation.
+* **k2**
+  * The scalar value to multiply the Point p2 by.
 
 Example
 
@@ -5788,7 +5671,7 @@ const p2 = new Point(2, 3);
 const result = p1.mulAdd(2, p2, 3);
 ```
 
-#### Method neg
+**Method neg**
 
 Negate a point. The negation of a point P is the mirror of P about x-axis.
 
@@ -5803,10 +5686,9 @@ const P = new Point('123', '456');
 const result = P.neg();
 ```
 
-#### Method toJ
+**Method toJ**
 
-Converts the point to a Jacobian point. If the point is at infinity, the corresponding Jacobian point
-will also be at infinity.
+Converts the point to a Jacobian point. If the point is at infinity, the corresponding Jacobian point will also be at infinity.
 
 ```ts
 toJ(): JPoint 
@@ -5823,7 +5705,7 @@ const point = new Point(xCoordinate, yCoordinate);
 const jacobianPoint = point.toJ();
 ```
 
-#### Method toJSON
+**Method toJSON**
 
 Exports the x and y coordinates of the point, and the precomputed doubles and non-adjacent form (NAF) for optimization. The output is an array.
 
@@ -5855,12 +5737,11 @@ const aPoint = new Point(x, y);
 const jsonPoint = aPoint.toJSON();
 ```
 
-#### Method toString
+**Method toString**
 
-function toString() { [native code] }
+function toString() { \[native code] }
 
-Converts the point coordinates to a hexadecimal string. A wrapper method
-for encode. Byte 0x02 or 0x03 is used as prefix based on the 'y' coordinate being even or odd respectively.
+Converts the point coordinates to a hexadecimal string. A wrapper method for encode. Byte 0x02 or 0x03 is used as prefix based on the 'y' coordinate being even or odd respectively.
 
 ```ts
 toString(): string 
@@ -5877,10 +5758,9 @@ const aPoint = new Point(x, y);
 const stringPoint = aPoint.toString();
 ```
 
-#### Method validate
+**Method validate**
 
-Validates if a point belongs to the curve. Follows the short Weierstrass
-equation for elliptic curves: y^2 = x^3 + ax + b.
+Validates if a point belongs to the curve. Follows the short Weierstrass equation for elliptic curves: y^2 = x^3 + ax + b.
 
 ```ts
 validate(): boolean 
@@ -5899,9 +5779,10 @@ const isValid = aPoint.validate();
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: Curve
 
 ```ts
@@ -5967,9 +5848,10 @@ export default class Curve {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: DRBG
 
 This class behaves as a HMAC-based deterministic random bit generator (DRBG). It implements a deterministic random number generator using SHA256HMAC HASH function. It takes an initial entropy and nonce when instantiated for seeding purpose.
@@ -5995,10 +5877,9 @@ export default class DRBG {
 
 <summary>Class DRBG Details</summary>
 
-#### Method generate
+**Method generate**
 
-Generates deterministic random hexadecimal string of given length.
-In every generation process, it also updates the internal state `K` and `V`.
+Generates deterministic random hexadecimal string of given length. In every generation process, it also updates the internal state `K` and `V`.
 
 ```ts
 generate(len: number): string 
@@ -6010,8 +5891,8 @@ The required deterministic random hexadecimal string.
 
 Argument Details
 
-+ **len**
-  + The length of required random number.
+* **len**
+  * The length of required random number.
 
 Example
 
@@ -6019,7 +5900,7 @@ Example
 const randomHex = drbg.generate(256);
 ```
 
-#### Method hmac
+**Method hmac**
 
 Generates HMAC using the K value of the instance. This method is used internally for operations.
 
@@ -6037,10 +5918,9 @@ Example
 const hmac = drbg.hmac();
 ```
 
-#### Method update
+**Method update**
 
-Updates the `K` and `V` values of the instance based on the seed.
-The seed if not provided uses `V` as seed.
+Updates the `K` and `V` values of the instance based on the seed. The seed if not provided uses `V` as seed.
 
 ```ts
 update(seed?): void 
@@ -6052,8 +5932,8 @@ Nothing, but updates the internal state `K` and `V` value.
 
 Argument Details
 
-+ **seed**
-  + an optional value that used to update `K` and `V`. Default is `undefined`.
+* **seed**
+  * an optional value that used to update `K` and `V`. Default is `undefined`.
 
 Example
 
@@ -6063,17 +5943,15 @@ drbg.update('e13af...');
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: Signature
 
 Represents a digital signature.
 
-A digital signature is a mathematical scheme for verifying the authenticity of
-digital messages or documents. In many scenarios, it is equivalent to a handwritten signature or stamped seal.
-The signature pair (R, S) corresponds to the raw ECDSA ([Elliptic Curve Digital Signature Algorithm](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm)) signature.
-Signatures are often serialized into a format known as '[DER encoding](https://en.wikipedia.org/wiki/X.690#DER_encoding)' for transmission.
+A digital signature is a mathematical scheme for verifying the authenticity of digital messages or documents. In many scenarios, it is equivalent to a handwritten signature or stamped seal. The signature pair (R, S) corresponds to the raw ECDSA ([Elliptic Curve Digital Signature Algorithm](https://en.wikipedia.org/wiki/Elliptic\_Curve\_Digital\_Signature\_Algorithm)) signature. Signatures are often serialized into a format known as '[DER encoding](https://en.wikipedia.org/wiki/X.690#DER\_encoding)' for transmission.
 
 ```ts
 export default class Signature {
@@ -6095,7 +5973,7 @@ export default class Signature {
 
 <summary>Class Signature Details</summary>
 
-#### Constructor
+**Constructor**
 
 Creates an instance of the Signature class.
 
@@ -6105,10 +5983,10 @@ constructor(r: BigNumber, s: BigNumber)
 
 Argument Details
 
-+ **r**
-  + The R component of the signature.
-+ **s**
-  + The S component of the signature.
+* **r**
+  * The R component of the signature.
+* **s**
+  * The S component of the signature.
 
 Example
 
@@ -6118,12 +5996,9 @@ const s = new BigNumber('564745627577...');
 const signature = new Signature(r, s);
 ```
 
-#### Method CalculateRecoveryFactor
+**Method CalculateRecoveryFactor**
 
-Calculates the recovery factor which will work for a particular public key and message hash.
-This method will return the recovery factor if it finds a valid recovery factor.
-If it does not find a valid recovery factor, it will throw an error.
-The recovery factor is a number between 0 and 3.
+Calculates the recovery factor which will work for a particular public key and message hash. This method will return the recovery factor if it finds a valid recovery factor. If it does not find a valid recovery factor, it will throw an error. The recovery factor is a number between 0 and 3.
 
 ```ts
 CalculateRecoveryFactor(pubkey: PublicKey, msgHash: BigNumber): number 
@@ -6131,13 +6006,12 @@ CalculateRecoveryFactor(pubkey: PublicKey, msgHash: BigNumber): number
 
 Returns
 
-the recovery factor: number
-/
+the recovery factor: number /
 
 Argument Details
 
-+ **msgHash**
-  + The message hash.
+* **msgHash**
+  * The message hash.
 
 Example
 
@@ -6145,12 +6019,9 @@ Example
 const recovery = signature.CalculateRecoveryFactor(publicKey, msgHash);
 ```
 
-#### Method RecoverPublicKey
+**Method RecoverPublicKey**
 
-Recovers the public key from a signature.
-This method will return the public key if it finds a valid public key.
-If it does not find a valid public key, it will throw an error.
-The recovery factor is a number between 0 and 3.
+Recovers the public key from a signature. This method will return the public key if it finds a valid public key. If it does not find a valid public key, it will throw an error. The recovery factor is a number between 0 and 3.
 
 ```ts
 RecoverPublicKey(recovery: number, e: BigNumber): PublicKey 
@@ -6162,10 +6033,10 @@ The public key associated with the signature.
 
 Argument Details
 
-+ **recovery**
-  + The recovery factor.
-+ **e**
-  + The message hash.
+* **recovery**
+  * The recovery factor.
+* **e**
+  * The message hash.
 
 Example
 
@@ -6173,15 +6044,9 @@ Example
 const publicKey = signature.RecoverPublicKey(0, msgHash);
 ```
 
-#### Method fromCompact
+**Method fromCompact**
 
-Takes an array of numbers or a string and returns a new Signature instance.
-This method will throw an error if the Compact encoding is invalid.
-If a string is provided, it is assumed to represent a hexadecimal sequence.
-compactByte value 27-31 means compressed public key.
-32-35 means uncompressed public key.
-The range represents the recovery param which can be 0,1,2,3,4.
-We could support recovery functions in future if there's demand.
+Takes an array of numbers or a string and returns a new Signature instance. This method will throw an error if the Compact encoding is invalid. If a string is provided, it is assumed to represent a hexadecimal sequence. compactByte value 27-30 means uncompressed public key. 31-34 means compressed public key. The range represents the recovery param which can be 0,1,2,3. We could support recovery functions in future if there's demand.
 
 ```ts
 static fromCompact(data: number[] | string, enc?: "hex" | "base64"): Signature 
@@ -6193,10 +6058,10 @@ The decoded data in the form of Signature instance.
 
 Argument Details
 
-+ **data**
-  + The sequence to decode from Compact encoding.
-+ **enc**
-  + The encoding of the data string.
+* **data**
+  * The sequence to decode from Compact encoding.
+* **enc**
+  * The encoding of the data string.
 
 Example
 
@@ -6204,11 +6069,9 @@ Example
 const signature = Signature.fromCompact('1b18c1f5502f8...', 'hex');
 ```
 
-#### Method fromDER
+**Method fromDER**
 
-Takes an array of numbers or a string and returns a new Signature instance.
-This method will throw an error if the DER encoding is invalid.
-If a string is provided, it is assumed to represent a hexadecimal sequence.
+Takes an array of numbers or a string and returns a new Signature instance. This method will throw an error if the DER encoding is invalid. If a string is provided, it is assumed to represent a hexadecimal sequence.
 
 ```ts
 static fromDER(data: number[] | string, enc?: "hex" | "base64"): Signature 
@@ -6220,10 +6083,10 @@ The decoded data in the form of Signature instance.
 
 Argument Details
 
-+ **data**
-  + The sequence to decode from DER encoding.
-+ **enc**
-  + The encoding of the data string.
+* **data**
+  * The sequence to decode from DER encoding.
+* **enc**
+  * The encoding of the data string.
 
 Example
 
@@ -6231,13 +6094,11 @@ Example
 const signature = Signature.fromDER('30440220018c1f5502f8...', 'hex');
 ```
 
-#### Method toCompact
+**Method toCompact**
 
 Converts an instance of Signature into Compact encoding.
 
-If the encoding parameter is set to 'hex', the function will return a hex string.
-If 'base64', it will return a base64 string.
-Otherwise, it will return an array of numbers.
+If the encoding parameter is set to 'hex', the function will return a hex string. If 'base64', it will return a base64 string. Otherwise, it will return an array of numbers.
 
 ```ts
 toCompact(recovery: number, compressed: boolean, enc?: "hex" | "base64"): number[] | string 
@@ -6249,8 +6110,8 @@ The current instance in DER encoding.
 
 Argument Details
 
-+ **enc**
-  + The encoding to use for the output.
+* **enc**
+  * The encoding to use for the output.
 
 Example
 
@@ -6258,13 +6119,11 @@ Example
 const compact = signature.toCompact(3, true, 'base64');
 ```
 
-#### Method toDER
+**Method toDER**
 
 Converts an instance of Signature into DER encoding.
 
-If the encoding parameter is set to 'hex', the function will return a hex string.
-If 'base64', it will return a base64 string.
-Otherwise, it will return an array of numbers.
+If the encoding parameter is set to 'hex', the function will return a hex string. If 'base64', it will return a base64 string. Otherwise, it will return an array of numbers.
 
 ```ts
 toDER(enc?: "hex" | "base64"): number[] | string 
@@ -6276,8 +6135,8 @@ The current instance in DER encoding.
 
 Argument Details
 
-+ **enc**
-  + The encoding to use for the output.
+* **enc**
+  * The encoding to use for the output.
 
 Example
 
@@ -6285,16 +6144,13 @@ Example
 const der = signature.toDER('hex');
 ```
 
-#### Method toString
+**Method toString**
 
-function toString() { [native code] }
+function toString() { \[native code] }
 
-Converts an instance of Signature into DER encoding.
-An alias for the toDER method.
+Converts an instance of Signature into DER encoding. An alias for the toDER method.
 
-If the encoding parameter is set to 'hex', the function will return a hex string.
-If 'base64', it will return a base64 string.
-Otherwise, it will return an array of numbers.
+If the encoding parameter is set to 'hex', the function will return a hex string. If 'base64', it will return a base64 string. Otherwise, it will return an array of numbers.
 
 ```ts
 toString(enc?: "hex" | "base64") 
@@ -6306,8 +6162,8 @@ The current instance in DER encoding.
 
 Argument Details
 
-+ **enc**
-  + The encoding to use for the output.
+* **enc**
+  * The encoding to use for the output.
 
 Example
 
@@ -6315,12 +6171,11 @@ Example
 const der = signature.toString('base64');
 ```
 
-#### Method verify
+**Method verify**
 
 Verifies a digital signature.
 
-This method will return true if the signature, key, and message hash match.
-If the data or key do not match the signature, the function returns false.
+This method will return true if the signature, key, and message hash match. If the data or key do not match the signature, the function returns false.
 
 ```ts
 verify(msg: number[] | string, key: PublicKey, enc?: "hex"): boolean 
@@ -6332,12 +6187,12 @@ A boolean representing whether the signature is valid.
 
 Argument Details
 
-+ **msg**
-  + The message to verify.
-+ **key**
-  + The public key used to sign the original message.
-+ **enc**
-  + The encoding of the msg string.
+* **msg**
+  * The message to verify.
+* **key**
+  * The public key used to sign the original message.
+* **enc**
+  * The encoding of the msg string.
 
 Example
 
@@ -6349,15 +6204,15 @@ const isVerified = signature.verify(msg, publicKey);
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: PrivateKey
 
 Represents a Private Key, which is a secret that can be used to generate signatures in a cryptographic system.
 
-The `PrivateKey` class extends from the `BigNumber` class. It offers methods to create signatures, verify them,
-create a corresponding public key and derive a shared secret from a public key.
+The `PrivateKey` class extends from the `BigNumber` class. It offers methods to create signatures, verify them, create a corresponding public key and derive a shared secret from a public key.
 
 ```ts
 export default class PrivateKey extends BigNumber {
@@ -6384,7 +6239,7 @@ export default class PrivateKey extends BigNumber {
 
 <summary>Class PrivateKey Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(number: BigNumber | number | string | number[] = 0, base: number | "be" | "le" | "hex" = 10, endian: "be" | "le" = "be", modN: "apply" | "nocheck" | "error" = "apply") 
@@ -6392,14 +6247,14 @@ constructor(number: BigNumber | number | string | number[] = 0, base: number | "
 
 Argument Details
 
-+ **number**
-  + The number (various types accepted) to construct a BigNumber from. Default is 0.
-+ **base**
-  + The base of number provided. By default is 10. Ignored if number is BigNumber.
-+ **endian**
-  + The endianness provided. By default is 'big endian'. Ignored if number is BigNumber.
-+ **modN**
-  + Optional. Default 'apply. If 'apply', apply modN to input to guarantee a valid PrivateKey. If 'error', if input is out of field throw Error('Input is out of field'). If 'nocheck', assumes input is in field.
+* **number**
+  * The number (various types accepted) to construct a BigNumber from. Default is 0.
+* **base**
+  * The base of number provided. By default is 10. Ignored if number is BigNumber.
+* **endian**
+  * The endianness provided. By default is 'big endian'. Ignored if number is BigNumber.
+* **modN**
+  * Optional. Default 'apply. If 'apply', apply modN to input to guarantee a valid PrivateKey. If 'error', if input is out of field throw Error('Input is out of field'). If 'nocheck', assumes input is in field.
 
 Example
 
@@ -6409,7 +6264,7 @@ import BigNumber from './BigNumber';
 const privKey = new PrivateKey(new BigNumber('123456', 10, 'be'));
 ```
 
-#### Method checkInField
+**Method checkInField**
 
 A utility function to check that the value of this PrivateKey lies in the field limited by curve.n
 
@@ -6424,7 +6279,7 @@ Returns
 
 , modN } where modN is this PrivateKey's current BigNumber value mod curve.n, and inField is true only if modN equals current BigNumber value.
 
-#### Method deriveChild
+**Method deriveChild**
 
 Derives a child key with BRC-42.
 
@@ -6438,12 +6293,12 @@ The derived child key.
 
 Argument Details
 
-+ **publicKey**
-  + The public key of the other party
-+ **invoiceNumber**
-  + The invoice number used to derive the child key
+* **publicKey**
+  * The public key of the other party
+* **invoiceNumber**
+  * The invoice number used to derive the child key
 
-#### Method deriveSharedSecret
+**Method deriveSharedSecret**
 
 Derives a shared secret from the public key.
 
@@ -6457,8 +6312,8 @@ The derived shared secret (a point on the curve).
 
 Argument Details
 
-+ **key**
-  + The public key to derive the shared secret from.
+* **key**
+  * The public key to derive the shared secret from.
 
 Throws
 
@@ -6472,7 +6327,7 @@ const publicKey = privateKey.toPublicKey();
 const sharedSecret = privateKey.deriveSharedSecret(publicKey);
 ```
 
-#### Method fromRandom
+**Method fromRandom**
 
 Generates a private key randomly.
 
@@ -6490,7 +6345,7 @@ Example
 const privateKey = PrivateKey.fromRandom();
 ```
 
-#### Method fromString
+**Method fromString**
 
 Generates a private key from a string.
 
@@ -6504,16 +6359,16 @@ The generated Private Key.
 
 Argument Details
 
-+ **str**
-  + The string to generate the private key from.
-+ **base**
-  + The base of the string.
+* **str**
+  * The string to generate the private key from.
+* **base**
+  * The base of the string.
 
 Throws
 
 Will throw an error if the string is not valid.
 
-#### Method fromWif
+**Method fromWif**
 
 Generates a private key from a WIF (Wallet Import Format) string.
 
@@ -6527,16 +6382,16 @@ The generated Private Key.
 
 Argument Details
 
-+ **wif**
-  + The WIF string to generate the private key from.
-+ **base**
-  + The base of the string.
+* **wif**
+  * The WIF string to generate the private key from.
+* **base**
+  * The base of the string.
 
 Throws
 
 Will throw an error if the string is not a valid WIF.
 
-#### Method isValid
+**Method isValid**
 
 ```ts
 isValid(): boolean 
@@ -6546,7 +6401,7 @@ Returns
 
 true if the PrivateKey's current BigNumber value lies in the field limited by curve.n
 
-#### Method sign
+**Method sign**
 
 Signs a message using the private key.
 
@@ -6560,14 +6415,14 @@ A digital signature generated from the hash of the message and the private key.
 
 Argument Details
 
-+ **msg**
-  + The message (array of numbers or string) to be signed.
-+ **enc**
-  + If 'hex' the string will be treated as hex, utf8 otherwise.
-+ **forceLowS**
-  + If true (the default), the signature will be forced to have a low S value.
-+ **customK**
-  + — If provided, uses a custom K-value for the signature. Provie a function that returns a BigNumber, or the BigNumber itself.
+* **msg**
+  * The message (array of numbers or string) to be signed.
+* **enc**
+  * If 'hex' the string will be treated as hex, utf8 otherwise.
+* **forceLowS**
+  * If true (the default), the signature will be forced to have a low S value.
+* **customK**
+  * — If provided, uses a custom K-value for the signature. Provie a function that returns a BigNumber, or the BigNumber itself.
 
 Example
 
@@ -6576,10 +6431,9 @@ const privateKey = PrivateKey.fromRandom();
 const signature = privateKey.sign('Hello, World!');
 ```
 
-#### Method toAddress
+**Method toAddress**
 
-Base58Check encodes the hash of the public key associated with this private key with a prefix to indicate locking script type.
-Defaults to P2PKH for mainnet, otherwise known as a "Bitcoin Address".
+Base58Check encodes the hash of the public key associated with this private key with a prefix to indicate locking script type. Defaults to P2PKH for mainnet, otherwise known as a "Bitcoin Address".
 
 ```ts
 toAddress(prefix: number[] = [0]): string 
@@ -6591,8 +6445,8 @@ Returns the address encoding associated with the hash of the public key associat
 
 Argument Details
 
-+ **prefix**
-  + defaults to [0x00] for mainnet, set to [0x6f] for testnet.
+* **prefix**
+  * defaults to \[0x00] for mainnet, set to \[0x6f] for testnet.
 
 Example
 
@@ -6601,7 +6455,7 @@ const address = pubkey.toAddress()
 const testnetAddress = pubkey.toAddress([0x6f])
 ```
 
-#### Method toPublicKey
+**Method toPublicKey**
 
 Converts the private key to its corresponding public key.
 
@@ -6622,12 +6476,11 @@ const privateKey = PrivateKey.fromRandom();
 const publicKey = privateKey.toPublicKey();
 ```
 
-#### Method toWif
+**Method toWif**
 
 Converts the private key to a Wallet Import Format (WIF) string.
 
-Base58Check encoding is used for encoding the private key.
-The prefix
+Base58Check encoding is used for encoding the private key. The prefix
 
 ```ts
 toWif(prefix: number[] = [128]): string 
@@ -6639,8 +6492,8 @@ The WIF string.
 
 Argument Details
 
-+ **prefix**
-  + defaults to [0x80] for mainnet, set it to [0xef] for testnet.
+* **prefix**
+  * defaults to \[0x80] for mainnet, set it to \[0xef] for testnet.
 
 Throws
 
@@ -6654,7 +6507,7 @@ const wif = privateKey.toWif();
 const testnetWif = privateKey.toWif([0xef]);
 ```
 
-#### Method verify
+**Method verify**
 
 Verifies a message's signature using the public key associated with this private key.
 
@@ -6668,12 +6521,12 @@ Whether or not the signature is valid.
 
 Argument Details
 
-+ **msg**
-  + The original message which has been signed.
-+ **sig**
-  + The signature to be verified.
-+ **enc**
-  + The data encoding method.
+* **msg**
+  * The original message which has been signed.
+* **sig**
+  * The signature to be verified.
+* **enc**
+  * The data encoding method.
 
 Example
 
@@ -6685,13 +6538,13 @@ const isSignatureValid = privateKey.verify('Hello, World!', signature);
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: PublicKey
 
-The PublicKey class extends the Point class. It is used in public-key cryptography to derive shared secret, verify message signatures, and encode the public key in the DER format.
-The class comes with static methods to generate PublicKey instances from private keys or from strings.
+The PublicKey class extends the Point class. It is used in public-key cryptography to derive shared secret, verify message signatures, and encode the public key in the DER format. The class comes with static methods to generate PublicKey instances from private keys or from strings.
 
 ```ts
 export default class PublicKey extends Point {
@@ -6704,6 +6557,7 @@ export default class PublicKey extends Point {
     toHash(enc?: "hex"): number[] | string 
     toAddress(prefix: number[] = [0]): string 
     deriveChild(privateKey: PrivateKey, invoiceNumber: string): PublicKey 
+    static fromMsgHashAndCompactSignature(msgHash: BigNumber, signature: number[] | string, enc?: "hex" | "base64"): PublicKey 
 }
 ```
 
@@ -6711,7 +6565,7 @@ export default class PublicKey extends Point {
 
 <summary>Class PublicKey Details</summary>
 
-#### Constructor
+**Constructor**
 
 ```ts
 constructor(x: Point | BigNumber | number | number[] | string | null, y: BigNumber | number | number[] | string | null = null, isRed: boolean = true) 
@@ -6719,12 +6573,12 @@ constructor(x: Point | BigNumber | number | number[] | string | null, y: BigNumb
 
 Argument Details
 
-+ **x**
-  + A point or the x-coordinate of the point. May be a number, a BigNumber, a string (which will be interpreted as hex), a number array, or null. If null, an "Infinity" point is constructed.
-+ **y**
-  + If x is not a point, the y-coordinate of the point, similar to x.
-+ **isRed**
-  + A boolean indicating if the point is a member of the field of integers modulo the k256 prime. Default is true.
+* **x**
+  * A point or the x-coordinate of the point. May be a number, a BigNumber, a string (which will be interpreted as hex), a number array, or null. If null, an "Infinity" point is constructed.
+* **y**
+  * If x is not a point, the y-coordinate of the point, similar to x.
+* **isRed**
+  * A boolean indicating if the point is a member of the field of integers modulo the k256 prime. Default is true.
 
 Example
 
@@ -6733,7 +6587,7 @@ new PublicKey(point1);
 new PublicKey('abc123', 'def456');
 ```
 
-#### Method deriveChild
+**Method deriveChild**
 
 Derives a child key with BRC-42.
 
@@ -6747,15 +6601,14 @@ The derived child key.
 
 Argument Details
 
-+ **privateKey**
-  + The private key of the other party
-+ **invoiceNumber**
-  + The invoice number used to derive the child key
+* **privateKey**
+  * The private key of the other party
+* **invoiceNumber**
+  * The invoice number used to derive the child key
 
-#### Method deriveSharedSecret
+**Method deriveSharedSecret**
 
-Derive a shared secret from a public key and a private key for use in symmetric encryption.
-This method multiplies the public key (an instance of Point) with a private key.
+Derive a shared secret from a public key and a private key for use in symmetric encryption. This method multiplies the public key (an instance of Point) with a private key.
 
 ```ts
 deriveSharedSecret(priv: PrivateKey): Point 
@@ -6767,8 +6620,8 @@ Returns the Point representing the shared secret.
 
 Argument Details
 
-+ **priv**
-  + The private key to use in deriving the shared secret.
+* **priv**
+  * The private key to use in deriving the shared secret.
 
 Throws
 
@@ -6781,10 +6634,36 @@ const myPrivKey = new PrivateKey(...)
 const sharedSecret = myPubKey.deriveSharedSecret(myPrivKey)
 ```
 
-#### Method fromPrivateKey
+**Method fromMsgHashAndCompactSignature**
 
-Static factory method to derive a public key from a private key.
-It multiplies the generator point 'g' on the elliptic curve by the private key.
+Takes an array of numbers or a string and returns a new PublicKey instance. This method will throw an error if the Compact encoding is invalid. If a string is provided, it is assumed to represent a hexadecimal sequence. compactByte value 27-30 means uncompressed public key. 31-34 means compressed public key. The range represents the recovery param which can be 0,1,2,3.
+
+```ts
+static fromMsgHashAndCompactSignature(msgHash: BigNumber, signature: number[] | string, enc?: "hex" | "base64"): PublicKey 
+```
+
+Returns
+
+A PublicKey instance derived from the message hash and compact signature.
+
+Argument Details
+
+* **msgHash**
+  * The message hash which was signed.
+* **signature**
+  * The signature in compact format.
+* **enc**
+  * The encoding of the signature string.
+
+Example
+
+```ts
+const publicKey = Signature.fromMsgHashAndCompactSignature(msgHash, 'IMOl2mVKfDgsSsHT4uIYBNN4e...', 'base64');
+```
+
+**Method fromPrivateKey**
+
+Static factory method to derive a public key from a private key. It multiplies the generator point 'g' on the elliptic curve by the private key.
 
 ```ts
 static fromPrivateKey(key: PrivateKey): PublicKey 
@@ -6796,8 +6675,8 @@ Returns the PublicKey derived from the given PrivateKey.
 
 Argument Details
 
-+ **key**
-  + The private key from which to derive the public key.
+* **key**
+  * The private key from which to derive the public key.
 
 Example
 
@@ -6806,7 +6685,7 @@ const myPrivKey = new PrivateKey(...)
 const myPubKey = PublicKey.fromPrivateKey(myPrivKey)
 ```
 
-#### Method fromString
+**Method fromString**
 
 Static factory method to create a PublicKey instance from a string.
 
@@ -6820,8 +6699,8 @@ Returns the PublicKey created from the string.
 
 Argument Details
 
-+ **str**
-  + A string representing a public key.
+* **str**
+  * A string representing a public key.
 
 Example
 
@@ -6829,10 +6708,9 @@ Example
 const myPubKey = PublicKey.fromString("03....")
 ```
 
-#### Method toAddress
+**Method toAddress**
 
-Base58Check encodes the hash of the public key with a prefix to indicate locking script type.
-Defaults to P2PKH for mainnet, otherwise known as a "Bitcoin Address".
+Base58Check encodes the hash of the public key with a prefix to indicate locking script type. Defaults to P2PKH for mainnet, otherwise known as a "Bitcoin Address".
 
 ```ts
 toAddress(prefix: number[] = [0]): string 
@@ -6844,8 +6722,8 @@ Returns the address encoding associated with the hash of the public key.
 
 Argument Details
 
-+ **prefix**
-  + defaults to [0x00] for mainnet, set to [0x6f] for testnet.
+* **prefix**
+  * defaults to \[0x00] for mainnet, set to \[0x6f] for testnet.
 
 Example
 
@@ -6854,7 +6732,7 @@ const address = pubkey.toAddress()
 const testnetAddress = pubkey.toAddress([0x6f])
 ```
 
-#### Method toDER
+**Method toDER**
 
 Encode the public key to DER (Distinguished Encoding Rules) format.
 
@@ -6872,7 +6750,7 @@ Example
 const derPublicKey = myPubKey.toDER()
 ```
 
-#### Method toHash
+**Method toHash**
 
 Hash sha256 and ripemd160 of the public key.
 
@@ -6890,7 +6768,7 @@ Example
 const publicKeyHash = pubkey.toHash()
 ```
 
-#### Method verify
+**Method verify**
 
 Verify a signature of a message using this public key.
 
@@ -6904,12 +6782,12 @@ Returns true if the signature is verified successfully, otherwise false.
 
 Argument Details
 
-+ **msg**
-  + The message to verify. It can be a string or an array of numbers.
-+ **sig**
-  + The Signature of the message that needs verification.
-+ **enc**
-  + The encoding of the message. It defaults to 'utf8'.
+* **msg**
+  * The message to verify. It can be a string or an array of numbers.
+* **sig**
+  * The Signature of the message that needs verification.
+* **enc**
+  * The encoding of the message. It defaults to 'utf8'.
 
 Example
 
@@ -6921,14 +6799,13 @@ const isVerified = myPubKey.verify(myMessage, mySignature)
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: SymmetricKey
 
-`SymmetricKey` is a class that extends the `BigNumber` class and implements symmetric encryption and decryption methods.
-Symmetric-Key encryption is a form of encryption where the same key is used to encrypt and decrypt the message.
-It leverages the Advanced Encryption Standard Galois/Counter Mode (AES-GCM) for encryption and decryption of messages.
+`SymmetricKey` is a class that extends the `BigNumber` class and implements symmetric encryption and decryption methods. Symmetric-Key encryption is a form of encryption where the same key is used to encrypt and decrypt the message. It leverages the Advanced Encryption Standard Galois/Counter Mode (AES-GCM) for encryption and decryption of messages.
 
 ```ts
 export default class SymmetricKey extends BigNumber {
@@ -6942,11 +6819,9 @@ export default class SymmetricKey extends BigNumber {
 
 <summary>Class SymmetricKey Details</summary>
 
-#### Method decrypt
+**Method decrypt**
 
-Decrypts a given AES-GCM encrypted message using the same key that was used for encryption.
-The method extracts the IV and the authentication tag from the encrypted message, then attempts to decrypt it.
-If the decryption fails (e.g., due to message tampering), an error is thrown.
+Decrypts a given AES-GCM encrypted message using the same key that was used for encryption. The method extracts the IV and the authentication tag from the encrypted message, then attempts to decrypt it. If the decryption fails (e.g., due to message tampering), an error is thrown.
 
 ```ts
 decrypt(msg: number[] | string, enc?: "hex" | "utf8"): string | number[] 
@@ -6958,10 +6833,10 @@ Returns the decrypted message as a string or an array of numbers, depending on `
 
 Argument Details
 
-+ **msg**
-  + The encrypted message to be decrypted. It can be a string or an array of numbers.
-+ **enc**
-  + optional. The encoding of the message (if no encoding is provided, uses utf8 for strings, unless specified as hex).
+* **msg**
+  * The encrypted message to be decrypted. It can be a string or an array of numbers.
+* **enc**
+  * optional. The encoding of the message (if no encoding is provided, uses utf8 for strings, unless specified as hex).
 
 Throws
 
@@ -6974,11 +6849,9 @@ const key = new SymmetricKey(1234);
 const decryptedMessage = key.decrypt(encryptedMessage, 'utf8');
 ```
 
-#### Method encrypt
+**Method encrypt**
 
-Encrypts a given message using AES-GCM encryption.
-The generated Initialization Vector (IV) is attached to the encrypted message for decryption purposes.
-The OpenSSL format of |IV|encryptedContent|authTag| is used.
+Encrypts a given message using AES-GCM encryption. The generated Initialization Vector (IV) is attached to the encrypted message for decryption purposes. The OpenSSL format of |IV|encryptedContent|authTag| is used.
 
 ```ts
 encrypt(msg: number[] | string, enc?: "hex"): string | number[] 
@@ -6990,10 +6863,10 @@ Returns the encrypted message as a string or an array of numbers, depending on `
 
 Argument Details
 
-+ **msg**
-  + The message to be encrypted. It can be a string or an array of numbers.
-+ **enc**
-  + optional. The encoding of the message. If hex, the string is assumed to be hex, UTF-8 otherwise.
+* **msg**
+  * The message to be encrypted. It can be a string or an array of numbers.
+* **enc**
+  * optional. The encoding of the message. If hex, the string is assumed to be hex, UTF-8 otherwise.
 
 Example
 
@@ -7002,7 +6875,7 @@ const key = new SymmetricKey(1234);
 const encryptedMessage = key.encrypt('plainText', 'utf8');
 ```
 
-#### Method fromRandom
+**Method fromRandom**
 
 Generates a symmetric key randomly.
 
@@ -7022,9 +6895,10 @@ const symmetricKey = SymmetricKey.fromRandom();
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Class: TransactionSignature
 
 ```ts
@@ -7059,11 +6933,9 @@ export default class TransactionSignature extends Signature {
 
 <summary>Class TransactionSignature Details</summary>
 
-#### Method hasLowS
+**Method hasLowS**
 
-Compares to bitcoind's IsLowDERSignature
-See also Ecdsa signature algorithm which enforces this.
-See also Bip 62, "low S values in signatures"
+Compares to bitcoind's IsLowDERSignature See also Ecdsa signature algorithm which enforces this. See also Bip 62, "low S values in signatures"
 
 ```ts
 public hasLowS(): boolean 
@@ -7071,24 +6943,25 @@ public hasLowS(): boolean
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ## Functions
 
-| |
-| --- |
-| [AES](#function-aes) |
-| [AESGCM](#function-aesgcm) |
-| [AESGCMDecrypt](#function-aesgcmdecrypt) |
-| [ghash](#function-ghash) |
-| [pbkdf2](#function-pbkdf2) |
-| [toArray](#function-toarray) |
-| [toBase64](#function-tobase64) |
+|                                                       |
+| ----------------------------------------------------- |
+| [AES](primitives.md#function-aes)                     |
+| [AESGCM](primitives.md#function-aesgcm)               |
+| [AESGCMDecrypt](primitives.md#function-aesgcmdecrypt) |
+| [ghash](primitives.md#function-ghash)                 |
+| [pbkdf2](primitives.md#function-pbkdf2)               |
+| [toArray](primitives.md#function-toarray)             |
+| [toBase64](primitives.md#function-tobase64)           |
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
 
 ### Function: toArray
 
@@ -7106,14 +6979,15 @@ array of byte values from msg. If msg is an array, a copy is returned.
 
 Argument Details
 
-+ **enc**
-  + Optional. Encoding to use if msg is string. Default is 'utf8'.
+* **enc**
+  * Optional. Encoding to use if msg is string. Default is 'utf8'.
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: pbkdf2
 
 Limited SHA-512-only PBKDF2 function for use in deprecated BIP39 code.
@@ -7132,22 +7006,23 @@ The computed key
 
 Argument Details
 
-+ **password**
-  + The PBKDF2 password
-+ **salt**
-  + The PBKDF2 salt
-+ **iterations**
-  + The number of of iterations to run
-+ **keylen**
-  + The length of the key
-+ **digest**
-  + The digest (must be sha512 for this implementation)
+* **password**
+  * The PBKDF2 password
+* **salt**
+  * The PBKDF2 salt
+* **iterations**
+  * The number of of iterations to run
+* **keylen**
+  * The length of the key
+* **digest**
+  * The digest (must be sha512 for this implementation)
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: toBase64
 
 Converts an array of bytes (each between 0 and 255) into a base64 encoded string.
@@ -7173,32 +7048,35 @@ The base64 encoded string.
 
 Argument Details
 
-+ **byteArray**
-  + An array of numbers where each number is a byte (0-255).
+* **byteArray**
+  * An array of numbers where each number is a byte (0-255).
 
 </details>
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: AES
 
 ```ts
 export function AES(input: number[], key: number[]): number[] 
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: ghash
 
 ```ts
 export function ghash(input: number[], hashSubKey: number[]): number[] 
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: AESGCM
 
 ```ts
@@ -7208,35 +7086,37 @@ export function AESGCM(plainText: number[], additionalAuthenticatedData: number[
 } 
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Function: AESGCMDecrypt
 
 ```ts
 export function AESGCMDecrypt(cipherText: number[], additionalAuthenticatedData: number[], initializationVector: number[], authenticationTag: number[], key: number[]): number[] | null 
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ## Variables
 
-| | | |
-| --- | --- | --- |
-| [checkBit](#variable-checkbit) | [multiply](#variable-multiply) | [toArray](#variable-toarray) |
-| [encode](#variable-encode) | [rightShift](#variable-rightshift) | [toBase58](#variable-tobase58) |
-| [exclusiveOR](#variable-exclusiveor) | [ripemd160](#variable-ripemd160) | [toBase58Check](#variable-tobase58check) |
-| [fromBase58](#variable-frombase58) | [sha1](#variable-sha1) | [toHex](#variable-tohex) |
-| [fromBase58Check](#variable-frombase58check) | [sha256](#variable-sha256) | [toUTF8](#variable-toutf8) |
-| [getBytes](#variable-getbytes) | [sha256hmac](#variable-sha256hmac) | [verify](#variable-verify) |
-| [hash160](#variable-hash160) | [sha512](#variable-sha512) | [zero2](#variable-zero2) |
-| [hash256](#variable-hash256) | [sha512hmac](#variable-sha512hmac) |  |
-| [incrementLeastSignificantThirtyTwoBits](#variable-incrementleastsignificantthirtytwobits) | [sign](#variable-sign) |  |
+|                                                                                                         |                                                 |                                                       |
+| ------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| [checkBit](primitives.md#variable-checkbit)                                                             | [multiply](primitives.md#variable-multiply)     | [toArray](primitives.md#variable-toarray)             |
+| [encode](primitives.md#variable-encode)                                                                 | [rightShift](primitives.md#variable-rightshift) | [toBase58](primitives.md#variable-tobase58)           |
+| [exclusiveOR](primitives.md#variable-exclusiveor)                                                       | [ripemd160](primitives.md#variable-ripemd160)   | [toBase58Check](primitives.md#variable-tobase58check) |
+| [fromBase58](primitives.md#variable-frombase58)                                                         | [sha1](primitives.md#variable-sha1)             | [toHex](primitives.md#variable-tohex)                 |
+| [fromBase58Check](primitives.md#variable-frombase58check)                                               | [sha256](primitives.md#variable-sha256)         | [toUTF8](primitives.md#variable-toutf8)               |
+| [getBytes](primitives.md#variable-getbytes)                                                             | [sha256hmac](primitives.md#variable-sha256hmac) | [verify](primitives.md#variable-verify)               |
+| [hash160](primitives.md#variable-hash160)                                                               | [sha512](primitives.md#variable-sha512)         | [zero2](primitives.md#variable-zero2)                 |
+| [hash256](primitives.md#variable-hash256)                                                               | [sha512hmac](primitives.md#variable-sha512hmac) |                                                       |
+| [incrementLeastSignificantThirtyTwoBits](primitives.md#variable-incrementleastsignificantthirtytwobits) | [sign](primitives.md#variable-sign)             |                                                       |
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
 
 ### Variable: ripemd160
 
@@ -7246,9 +7126,10 @@ ripemd160 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sha1
 
 ```ts
@@ -7257,9 +7138,10 @@ sha1 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sha256
 
 ```ts
@@ -7268,9 +7150,10 @@ sha256 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sha512
 
 ```ts
@@ -7279,9 +7162,10 @@ sha512 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: hash256
 
 ```ts
@@ -7291,9 +7175,10 @@ hash256 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: hash160
 
 ```ts
@@ -7303,9 +7188,10 @@ hash160 = (msg: number[] | string, enc?: "hex" | "utf8"): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sha256hmac
 
 ```ts
@@ -7314,9 +7200,10 @@ sha256hmac = (key: number[] | string, msg: number[] | string, enc?: "hex"): numb
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sha512hmac
 
 ```ts
@@ -7325,9 +7212,10 @@ sha512hmac = (key: number[] | string, msg: number[] | string, enc?: "hex"): numb
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: zero2
 
 ```ts
@@ -7341,9 +7229,10 @@ zero2 = (word: string): string => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: toHex
 
 ```ts
@@ -7356,9 +7245,10 @@ toHex = (msg: number[]): string => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: toArray
 
 ```ts
@@ -7418,9 +7308,10 @@ toArray = (msg: any, enc?: "hex" | "utf8" | "base64"): any[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: toUTF8
 
 ```ts
@@ -7456,9 +7347,10 @@ toUTF8 = (arr: number[]): string => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: encode
 
 ```ts
@@ -7474,9 +7366,10 @@ encode = (arr: number[], enc?: "hex" | "utf8"): string | number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: fromBase58
 
 ```ts
@@ -7510,9 +7403,10 @@ fromBase58 = (str: string): number[] => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: toBase58
 
 ```ts
@@ -7545,9 +7439,10 @@ toBase58 = (bin: number[]): string => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: toBase58Check
 
 ```ts
@@ -7558,9 +7453,10 @@ toBase58Check = (bin: number[], prefix: number[] = [0]) => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: fromBase58Check
 
 ```ts
@@ -7583,9 +7479,10 @@ fromBase58Check = (str: string, enc?: "hex", prefixLength: number = 1) => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: sign
 
 ```ts
@@ -7649,9 +7546,10 @@ sign = (msg: BigNumber, key: BigNumber, forceLowS: boolean = false, customK?: Bi
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: verify
 
 ```ts
@@ -7677,9 +7575,10 @@ verify = (msg: BigNumber, sig: Signature, key: Point): boolean => {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: checkBit
 
 ```ts
@@ -7688,9 +7587,10 @@ checkBit = function (byteArray: number[], byteIndex: number, bitIndex: number): 
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: getBytes
 
 ```ts
@@ -7704,9 +7604,10 @@ getBytes = function (numericValue: number): number[] {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: exclusiveOR
 
 ```ts
@@ -7720,9 +7621,10 @@ exclusiveOR = function (block0: number[], block1: number[]): number[] {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: rightShift
 
 ```ts
@@ -7742,9 +7644,10 @@ rightShift = function (block: number[]): number[] {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: multiply
 
 ```ts
@@ -7770,9 +7673,10 @@ multiply = function (block0: number[], block1: number[]): number[] {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
+
 ### Variable: incrementLeastSignificantThirtyTwoBits
 
 ```ts
@@ -7792,6 +7696,6 @@ incrementLeastSignificantThirtyTwoBits = function (block: number[]): number[] {
 }
 ```
 
-Links: [API](#api), [Interfaces](#interfaces), [Classes](#classes), [Functions](#functions), [Variables](#variables)
+Links: [API](primitives.md#api), [Interfaces](primitives.md#interfaces), [Classes](primitives.md#classes), [Functions](primitives.md#functions), [Variables](primitives.md#variables)
 
----
+***
